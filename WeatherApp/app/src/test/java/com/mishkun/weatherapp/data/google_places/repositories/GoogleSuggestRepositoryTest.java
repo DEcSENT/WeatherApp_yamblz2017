@@ -2,6 +2,7 @@ package com.mishkun.weatherapp.data.google_places.repositories;
 
 import com.google.gson.Gson;
 import com.mishkun.weatherapp.data.google_places.GooglePlacesApi;
+import com.mishkun.weatherapp.data.google_places.detailCityInfo.LocationCity;
 import com.mishkun.weatherapp.domain.entities.City;
 import com.mishkun.weatherapp.domain.entities.Location;
 import com.mishkun.weatherapp.data.google_places.citiesSuggest.CitiesSuggest;
@@ -66,7 +67,7 @@ public class GoogleSuggestRepositoryTest {
 
         TestObserver<City> cityCoordinatesTestObserver = googlePlacesApi.getDetailPlaceInfo(anyString(), anyString())
                 .map((coords) -> {
-                    com.mishkun.weatherapp.data.google_places.detailCityInfo.Location loc = coords.getResult().getGeometry().getLocation();
+                    LocationCity loc = coords.getResult().getGeometry().getLocationCity();
                     return new City(coords.getResult().getName(), new Location(loc.getLat(), loc.getLng()));
                 }).test();
 

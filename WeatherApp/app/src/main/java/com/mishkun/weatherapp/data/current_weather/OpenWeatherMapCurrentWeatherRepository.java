@@ -34,16 +34,16 @@ public class OpenWeatherMapCurrentWeatherRepository implements CurrentWeatherPro
     }
 
     private Weather getDefaultWeather() {
-        com.mishkun.weatherapp.data.current_weather.Weather weather = null;
+        WeatherRaw weatherRaw = null;
 
         SharedPreferences sharedPreferences = context.getSharedPreferences(cache, Context.MODE_PRIVATE);
 
         String jsonFile = sharedPreferences.getString(cache, "");
         Gson gson = new Gson();
-        weather = gson.fromJson(jsonFile, com.mishkun.weatherapp.data.current_weather.Weather.class);
+        weatherRaw = gson.fromJson(jsonFile, WeatherRaw.class);
 
-        if (weather != null) {
-            return WeatherMapper.toDomain(weather, new Date().getTime());
+        if (weatherRaw != null) {
+            return WeatherRawMapper.toDomain(weatherRaw, new Date().getTime());
         }
         return new Weather(new Temperature(295), 90, 769, WeatherConditions.CLEAR, 0, 1500046530, "MoscoW");
     }
@@ -52,15 +52,15 @@ public class OpenWeatherMapCurrentWeatherRepository implements CurrentWeatherPro
     public Completable refreshData(@NonNull Location location) {
         return Completable.fromObservable(openWeatherMapApi.getWeather(location.getLatitude(), location.getLongitude(), API_KEY)
                 .doOnNext(this::cacheIt)
-                .map((weather) -> WeatherMapper.toDomain(weather, new Date().getTime()))
+                .map((weatherRaw) -> WeatherRawMapper.toDomain(weatherRaw, new Date().getTime()))
                 .doOnNext(weatherBehaviorSubject));
     }
 
     @SuppressLint("CommitPrefEdits")
-    private void cacheIt(com.mishkun.weatherapp.data.current_weather.Weather weather) {
+    private void cacheIt(WeatherRaw weatherRaw) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(cache, Context.MODE_PRIVATE);
         Gson gson = new Gson();
-        String weatherjson = gson.toJson(weather, com.mishkun.weatherapp.data.current_weather.Weather.class);
+        String weatherjson = gson.toJson(weatherRaw, WeatherRaw.class);
 
         sharedPreferences.edit().putString(cache, weatherjson).apply();
     }

@@ -4,7 +4,7 @@ package com.mishkun.weatherapp.data.google_places.detailCityInfo;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Location {
+public class LocationCity {
 
     @SerializedName("lat")
     @Expose

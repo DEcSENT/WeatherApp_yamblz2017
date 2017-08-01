@@ -1,13 +1,14 @@
 package com.mishkun.weatherapp.data.current_weather;
 
 import com.mishkun.weatherapp.domain.entities.Temperature;
+import com.mishkun.weatherapp.domain.entities.Weather;
 import com.mishkun.weatherapp.domain.entities.WeatherConditions;
 
-class WeatherMapper {
-    static com.mishkun.weatherapp.domain.entities.Weather toDomain(Weather weather, long timestamp) {
-        return new com.mishkun.weatherapp.domain.entities.Weather(new Temperature(weather.main.temperature), weather.main.humidity,
-                hPaToMmHg(weather.main.pressureHPa),
-                codeToCondition(weather.weather.get(0).weather_id), weather.wind.windSpeed,
+class WeatherRawMapper {
+    static Weather toDomain(WeatherRaw weatherRaw, long timestamp) {
+        return new Weather(new Temperature(weatherRaw.main.temperature), weatherRaw.main.humidity,
+                hPaToMmHg(weatherRaw.main.pressureHPa),
+                codeToCondition(weatherRaw.weather.get(0).weather_id), weatherRaw.wind.windSpeed,
                 timestamp, null);
     }
 
