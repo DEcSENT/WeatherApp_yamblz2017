@@ -4,10 +4,6 @@ import android.support.annotation.NonNull;
 
 import java.util.Date;
 
-/**
- * Created by Mishkun on 14.07.2017.
- */
-
 public class Weather {
     private final Temperature temperature;
     private final double humidity;

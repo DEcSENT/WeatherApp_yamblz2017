@@ -1,6 +1,5 @@
 package com.mishkun.weatherapp;
 
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -22,7 +21,6 @@ import com.mishkun.weatherapp.presentation.settings.SettingsFragment;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, HasComponent<WeatherScreenComponent> {
-
 
     private WeatherScreenComponent weatherScreenComponent;
 

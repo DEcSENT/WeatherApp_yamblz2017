@@ -11,9 +11,6 @@ import javax.inject.Inject;
 
 import io.reactivex.Completable;
 
-/**
- * Created by Mishkun on 19.07.2017.
- */
 @SettingsScreen
 public class SettingsRxPresenter extends RxPresenter<SettingsView> {
 

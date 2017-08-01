@@ -14,9 +14,6 @@ import javax.inject.Inject;
 
 import io.reactivex.Completable;
 
-/**
- * Created by Mishkun on 15.07.2017.
- */
 @WeatherScreen
 public class WeatherRxPresenter extends RxPresenter<WeatherView> {
     private static final String TAG = WeatherRxPresenter.class.getSimpleName();
@@ -26,8 +23,6 @@ public class WeatherRxPresenter extends RxPresenter<WeatherView> {
     private BehaviorRelay<Weather> weatherStatus;
     private BehaviorRelay<Boolean> loadingStatus;
     private PublishRelay<String> errorMessages;
-
-    private ApplyCityInfo applyCityInfo;
 
     @Inject
     WeatherRxPresenter(GetWeatherSubscription getWeatherSubscription, UpdateWeather updateWeather,
@@ -42,7 +37,6 @@ public class WeatherRxPresenter extends RxPresenter<WeatherView> {
 
         // MAYBE HERE WILL BE SUBSCRIBE TO REPOSITORY WITH LOCATION? OR INTERACTOR?
     }
-
 
     @Override
     protected void onAttach() {

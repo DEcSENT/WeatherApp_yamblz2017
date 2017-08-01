@@ -8,10 +8,6 @@ import dagger.Subcomponent;
 import io.reactivex.Scheduler;
 import io.reactivex.Single;
 
-/**
- * Created by Mishkun on 19.07.2017.
- */
-
 public abstract class SingleInteractor<P, R> {
     private final Scheduler jobScheduler;
     private final Scheduler uiScheduler;

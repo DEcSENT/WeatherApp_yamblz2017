@@ -3,10 +3,6 @@ package com.mishkun.weatherapp.data.current_weather;
 import com.mishkun.weatherapp.domain.entities.Temperature;
 import com.mishkun.weatherapp.domain.entities.WeatherConditions;
 
-/**
- * Created by Mishkun on 14.07.2017.
- */
-
 class WeatherMapper {
     static com.mishkun.weatherapp.domain.entities.Weather toDomain(Weather weather, long timestamp) {
         return new com.mishkun.weatherapp.domain.entities.Weather(new Temperature(weather.main.temperature), weather.main.humidity,

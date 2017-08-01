@@ -11,10 +11,6 @@ import java.util.concurrent.TimeUnit;
 import io.reactivex.Completable;
 import io.reactivex.Single;
 
-/**
- * Created by Mishkun on 19.07.2017.
- */
-
 public class UpdateSharedPreferenceProvider implements UpdatePreferenceProvider {
     private static final String KEY_WEATHER_UPDATE = "WEATHER_UPDATE";
     private final Context context;

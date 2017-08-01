@@ -7,9 +7,6 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 
-/**
- * Created by Mishkun on 16.07.2017.
- */
 @Singleton
 @Component(modules = {AppModule.class, DomainModule.class, DataModule.class, WeatherSchedulerModule.class})
 public interface AppComponent {

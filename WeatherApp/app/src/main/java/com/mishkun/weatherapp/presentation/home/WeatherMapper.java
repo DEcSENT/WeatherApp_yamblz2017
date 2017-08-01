@@ -9,9 +9,6 @@ import com.mishkun.weatherapp.domain.entities.Weather;
 
 import javax.inject.Inject;
 
-/**
- * Created by Mishkun on 21.07.2017.
- */
 @WeatherScreen
 public class WeatherMapper {
     private final String pressureFmt;
@@ -64,5 +61,4 @@ public class WeatherMapper {
                 String.format(windFmt, weather.getWindSpeed()),
                 res, weather.getCityName());
     }
-
 }

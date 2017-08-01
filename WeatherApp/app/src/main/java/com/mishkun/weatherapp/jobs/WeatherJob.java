@@ -10,10 +10,6 @@ import com.mishkun.weatherapp.domain.interactors.UpdateWeather;
 
 import java.util.concurrent.TimeUnit;
 
-/**
- * Created by Mishkun on 16.07.2017.
- */
-
 public class WeatherJob extends Job {
     static final String TAG = "WeatherJob";
 

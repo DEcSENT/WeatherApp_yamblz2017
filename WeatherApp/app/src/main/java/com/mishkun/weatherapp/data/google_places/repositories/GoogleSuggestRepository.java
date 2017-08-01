@@ -37,7 +37,7 @@ public class GoogleSuggestRepository implements SuggestRepository {
         return googlePlacesApi.getDetailPlaceInfo(cityID, API_KEY_GOOGLE)
                 .map((coords) -> {
                     com.mishkun.weatherapp.data.google_places.detailCityInfo.Location loc = coords.getResult().getGeometry().getLocation();
-                    Log.v("CITY NAME, WTF?!", coords.getResult().getName());
+                    //Log.v("CITY NAME, WTF?!", coords.getResult().getName());
                     return new City(coords.getResult().getName(), new Location(loc.getLat(), loc.getLng()));
                 });
     }

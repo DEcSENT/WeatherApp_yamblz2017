@@ -6,9 +6,6 @@ import com.mishkun.weatherapp.presentation.settings.SettingsFragment;
 
 import dagger.Subcomponent;
 
-/**
- * Created by Mishkun on 17.07.2017.
- */
 @Subcomponent()
 @WeatherScreen
 public interface WeatherScreenComponent {

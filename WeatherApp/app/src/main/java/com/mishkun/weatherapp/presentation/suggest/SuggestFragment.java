@@ -89,11 +89,11 @@ public class SuggestFragment extends Fragment implements SuggestView{
     }
 
     public void setRxTextChangerListener(){
-        Observable<String> obs = RxTextView.textChanges(citySuggestEditText)
+        Observable<String> cityObservable = RxTextView.textChanges(citySuggestEditText)
                 .filter(charSequence -> charSequence.length() > 1)
                 .debounce(1000, TimeUnit.MILLISECONDS)
                 .map(CharSequence::toString);
-        obs.subscribe(string -> suggestPresenter.getSuggestFromWeb(string));
+        cityObservable.subscribe(string -> suggestPresenter.getSuggestFromWeb(string));
     }
 
     @Override

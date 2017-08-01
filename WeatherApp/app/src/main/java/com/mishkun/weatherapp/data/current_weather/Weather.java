@@ -4,10 +4,6 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-/**
- * Created by Mishkun on 14.07.2017.
- */
-
 /*
  * JSON mapper object. See https://openweathermap.org/current#format for details
  */

@@ -5,10 +5,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
-/**
- * Created by Mishkun on 14.07.2017.
- */
-
 public interface OpenWeatherMapApi {
 
     @GET("weather")

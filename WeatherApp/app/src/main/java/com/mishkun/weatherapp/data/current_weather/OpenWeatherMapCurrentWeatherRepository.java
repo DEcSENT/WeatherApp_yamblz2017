@@ -18,10 +18,6 @@ import java.util.Date;
 import io.reactivex.Completable;
 import io.reactivex.Observable;
 
-/**
- * Created by Mishkun on 14.07.2017.
- */
-
 public class OpenWeatherMapCurrentWeatherRepository implements CurrentWeatherProvider {
     private static final String TAG = OpenWeatherMapCurrentWeatherRepository.class.getSimpleName();
     private final String API_KEY = "a94b47f30f78afba43ac68effc69a24a";

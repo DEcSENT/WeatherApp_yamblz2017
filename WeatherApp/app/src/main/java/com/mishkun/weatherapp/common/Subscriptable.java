@@ -5,10 +5,6 @@ import android.support.annotation.NonNull;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
-/**
- * Created by Mishkun on 14.07.2017.
- */
-
 abstract public class Subscriptable {
     private final CompositeDisposable subscriptions;
 

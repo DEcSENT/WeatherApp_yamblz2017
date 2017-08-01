@@ -4,7 +4,6 @@ package com.mishkun.weatherapp.presentation.suggest;
  * 24.07.2017
  */
 
-
 import com.mishkun.weatherapp.data.google_places.citiesSuggest.Prediction;
 
 import java.util.List;

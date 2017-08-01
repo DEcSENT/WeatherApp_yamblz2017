@@ -2,10 +2,6 @@ package com.mishkun.weatherapp.presentation;
 
 import com.mishkun.weatherapp.common.Subscriptable;
 
-/**
- * Created by Mishkun on 15.07.2017.
- */
-
 public abstract class RxPresenter<V> extends Subscriptable {
 
     /*

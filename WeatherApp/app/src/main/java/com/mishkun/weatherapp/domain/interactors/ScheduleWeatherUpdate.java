@@ -13,10 +13,6 @@ import io.reactivex.annotations.NonNull;
 import static com.mishkun.weatherapp.di.NamedConsts.JOB;
 import static com.mishkun.weatherapp.di.NamedConsts.UI;
 
-/**
- * Created by Mishkun on 19.07.2017.
- */
-
 public class ScheduleWeatherUpdate extends CompletableInteractor<Long> {
 
     private final WeatherUpdatesScheduler weatherUpdatesScheduler;
