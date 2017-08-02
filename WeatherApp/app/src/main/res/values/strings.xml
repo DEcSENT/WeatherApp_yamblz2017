@@ -17,10 +17,21 @@
     <string name="moscow">Moscow</string>
     <string name="time_preference_key" translatable="false">time_preference</string>
     <string name="default_time_prefernce_value" translatable="false">15</string>
-    <string name="humidity_fmt_string">humidity: %.0f%%</string>
-    <string name="pressure_fmt_string">pressure: %.1f mm Hg</string>
+    <string name="humidity_fmt_string">%.0f%%</string>
+    <string name="pressure_fmt_string">%.0f</string>
+    <!--<string name="pressure_fmt_string">%.1f mm Hg</string>-->
     <string name="temperature_fmt_string">%.0f°</string>
-    <string name="wind_fmt_string">wind: %.1f m/s</string>
+    <string name="wind_fmt_string">%.1f m/s</string>
     <string name="refresh_weather_setting">Refresh weather every</string>
 
+    <string name="weatherIcon_description_text">Weather icon</string>
+    <string name="windIcon_description_text">Wind icon</string>
+    <string name="humidityIcon_description_text">Humidity icon</string>
+    <string name="pressureIcon_description_text">Pressure icon</string>
+
+    <string name="wind_string">Wind</string>
+    <string name="pressure_string">Pressure</string>
+    <string name="humidity_string">Humidity</string>
+
+    <string name="icon_author_credit">Icons made by RNS from www.flaticon.com is licensed by CC 3.0 BY</string>
 </resources>

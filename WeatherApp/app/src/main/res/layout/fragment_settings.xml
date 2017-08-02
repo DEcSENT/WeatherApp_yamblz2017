@@ -14,11 +14,10 @@
         android:text="@string/refresh_weather_setting"
         android:textColor="@android:color/black"
         android:textSize="@dimen/medium_text"
-        app:layout_constraintEnd_toStartOf="@+id/refresh_weather_spinner"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"/>
+        />
 
     <android.support.v7.widget.AppCompatSpinner
         android:id="@+id/refresh_weather_spinner"
@@ -27,7 +26,6 @@
         android:layout_margin="16dp"
         android:entries="@array/time_schedule_preference_entries"
         android:textSize="@dimen/medium_text"
-        app:layout_constraintStart_toEndOf="@+id/refresh_weather_summary"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="8dp"/>

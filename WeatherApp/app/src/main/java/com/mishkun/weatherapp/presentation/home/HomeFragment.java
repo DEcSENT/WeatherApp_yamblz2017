@@ -46,7 +46,7 @@ public class HomeFragment extends Fragment implements WeatherView {
     public TextView windView;
     @BindView(R.id.pressure_text_view)
     public TextView pressureView;
-    @BindView(R.id.swiperefresh)
+    @BindView(R.id.weatherFragment)
     public SwipeRefreshLayout swipeRefreshLayout;
     @BindView(R.id.icon_view)
     public ImageView imageView;
@@ -69,7 +69,7 @@ public class HomeFragment extends Fragment implements WeatherView {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_weather, container, false);
         ButterKnife.bind(this, view);
         return view;
     }

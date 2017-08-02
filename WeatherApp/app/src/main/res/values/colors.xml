@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#50c8ef</color>
+    <color name="colorPrimary">#ffcc00</color>
     <color name="colorPrimaryDark">#1ea6c6</color>
     <color name="colorAccent">#ffc400</color>
+
+    <color name="colorSmallWeatherText">#ffffff</color>
+    <color name="colorCityName">#ffffff</color>
 </resources>
