@@ -10,6 +10,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.mishkun.weatherapp.di.AppComponent;
@@ -19,14 +20,20 @@ import com.mishkun.weatherapp.presentation.AboutFragment;
 import com.mishkun.weatherapp.presentation.home.HomeFragment;
 import com.mishkun.weatherapp.presentation.settings.SettingsFragment;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, HasComponent<WeatherScreenComponent> {
 
     private WeatherScreenComponent weatherScreenComponent;
+    private Toolbar toolbar;
 
     @Override
     protected void onResume() {
         super.onResume();
+        setBackground();
     }
 
     @Override
@@ -34,7 +41,7 @@ public class HomeActivity extends AppCompatActivity
         setTheme(R.style.AppTheme_NoActionBar);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -96,5 +103,23 @@ public class HomeActivity extends AppCompatActivity
     @Override
     public WeatherScreenComponent getComponent() {
         return weatherScreenComponent;
+    }
+    private void setBackground() {
+        long time = System.currentTimeMillis();
+        Date date = new Date(time);
+        SimpleDateFormat sdf = new SimpleDateFormat("HH", Locale.getDefault());
+        int currentHour = Integer.parseInt(sdf.format(date));
+        Log.v("time", currentHour+"");
+        if(currentHour > 0 & currentHour < 6){
+            toolbar.setBackgroundResource(R.color.colorTopNight);
+        } else if(currentHour >= 6 & currentHour <= 10){
+            toolbar.setBackgroundResource(R.color.colorTopMorning);
+        } else if(currentHour > 10 & currentHour <= 19){
+            toolbar.setBackgroundResource(R.color.colorTopDay);
+        } else if(currentHour > 19){
+            toolbar.setBackgroundResource(R.color.colorTopEvening);
+        } else {
+            toolbar.setBackgroundResource(R.color.colorAccent);
+        }
     }
 }

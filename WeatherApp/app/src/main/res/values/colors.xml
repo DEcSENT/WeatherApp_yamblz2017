@@ -6,4 +6,15 @@
 
     <color name="colorSmallWeatherText">#ffffff</color>
     <color name="colorCityName">#ffffff</color>
+
+    <!--Colors set fot backgrounds-->
+    <color name="colorTopNight">#0b001d</color>
+    <color name="colorTopDay">#006fff</color>
+    <color name="colorTopEvening">#000471</color>
+    <color name="colorTopMorning">#12003c</color>
+    <color name="colorBottomNight">#1d154d</color>
+    <color name="colorBottomDay">#ffa322</color>
+    <color name="colorBottomEvening">#ff8f27</color>
+    <color name="colorBottomMorning">#393dff</color>
+
 </resources>

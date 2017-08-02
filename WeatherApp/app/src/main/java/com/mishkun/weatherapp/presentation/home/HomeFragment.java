@@ -38,20 +38,20 @@ public class HomeFragment extends Fragment implements WeatherView {
     public static final String TAG = HomeFragment.class.getSimpleName();
 
 
-    @BindView(R.id.degrees_text_view)
+    @BindView(R.id.degreesTextView)
     public TextView degreesView;
-    @BindView(R.id.humidity_text_view)
+    @BindView(R.id.humidityTextView)
     public TextView humidityView;
-    @BindView(R.id.wind_text_view)
+    @BindView(R.id.windTextView)
     public TextView windView;
-    @BindView(R.id.pressure_text_view)
+    @BindView(R.id.pressureTextView)
     public TextView pressureView;
     @BindView(R.id.weatherFragment)
     public SwipeRefreshLayout swipeRefreshLayout;
-    @BindView(R.id.icon_view)
+    @BindView(R.id.iconWeatherImageView)
     public ImageView imageView;
-    @BindView(R.id.city_text_view)
-    public TextView city_text_view;
+    @BindView(R.id.cityTextView)
+    public TextView cityTextView;
     @Inject
     public WeatherRxPresenter weatherRxPresenter;
 
@@ -88,6 +88,7 @@ public class HomeFragment extends Fragment implements WeatherView {
     public void onResume() {
         super.onResume();
         weatherRxPresenter.attachView(this);
+        swipeRefreshLayout.setBackground(getResources().getDrawable(weatherRxPresenter.getBackground()));
     }
 
     @Override
@@ -110,7 +111,7 @@ public class HomeFragment extends Fragment implements WeatherView {
             pressureView.setText(weather.getPressureText());
             windView.setText(weather.getWindText());
             imageView.setBackgroundResource(weather.getIconResource());
-            city_text_view.setText(weather.getCityName());
+            cityTextView.setText(weather.getCityName());
         };
     }
 
@@ -126,7 +127,7 @@ public class HomeFragment extends Fragment implements WeatherView {
         return (Consumer<Boolean>) RxSwipeRefreshLayout.refreshing(swipeRefreshLayout);
     }
 
-    @OnClick(R.id.city_text_view)
+    @OnClick(R.id.cityTextView)
     public void giveMeSuggest(){
         Log.v("CityName", "CLick!");
         FragmentManager fm = getFragmentManager();
