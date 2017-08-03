@@ -27,4 +27,6 @@
     <string name="humidity_string">Влажность</string>
 
     <string name="icon_author_credit">Icons made by RNS from www.flaticon.com is licensed by CC 3.0 BY</string>
+
+    <string name="autoupdate_weather_text">Автообновление</string>
 </resources>

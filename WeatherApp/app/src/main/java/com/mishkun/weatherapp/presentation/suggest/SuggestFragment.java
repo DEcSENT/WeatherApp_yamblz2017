@@ -64,7 +64,7 @@ public class SuggestFragment extends Fragment implements SuggestView{
         setRxTextChangerListener();
 
         List<Prediction> list = new ArrayList<>();
-        list.add(new Prediction("Москва", "", ""));
+        list.add(new Prediction("Москва", "ChIJybDUc_xKtUYRTM9XV8zWRD0", "ChIJybDUc_xKtUYRTM9XV8zWRD0"));
         suggestRecyclerAdapter = new SuggestRecyclerAdapter(list, new onClickRecyclerItem() {
             @Override
             public void onclick(Prediction prediction) {

@@ -15,7 +15,7 @@
 
         <TextView
             android:id="@+id/cityTextView"
-            style="@style/Weather_city_name"
+            style="@style/Weather_city_name_style"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -52,7 +52,7 @@
 
         <TextView
             android:id="@+id/justHumidityText"
-            style="@style/Weather_small_text"
+            style="@style/Weather_small_text_style"
             android:layout_marginTop="8dp"
             android:text="@string/humidity_string"
             app:layout_constraintEnd_toStartOf="@+id/guideline1"
@@ -75,7 +75,7 @@
 
         <TextView
             android:id="@+id/humidityTextView"
-            style="@style/Weather_small_text"
+            style="@style/Weather_small_text_style"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toStartOf="@+id/guideline1"
             app:layout_constraintHorizontal_bias="0.5"
@@ -86,7 +86,7 @@
 
         <TextView
             android:id="@+id/justWindText"
-            style="@style/Weather_small_text"
+            style="@style/Weather_small_text_style"
             android:layout_marginTop="8dp"
             android:text="@string/wind_string"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
@@ -110,7 +110,7 @@
 
         <TextView
             android:id="@+id/windTextView"
-            style="@style/Weather_small_text"
+            style="@style/Weather_small_text_style"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintHorizontal_bias="0.5"
@@ -121,7 +121,7 @@
 
         <TextView
             android:id="@+id/justPressureText"
-            style="@style/Weather_small_text"
+            style="@style/Weather_small_text_style"
             android:layout_marginTop="8dp"
             android:text="@string/pressure_string"
             app:layout_constraintEnd_toEndOf="parent"
@@ -145,7 +145,7 @@
 
         <TextView
             android:id="@+id/pressureTextView"
-            style="@style/Weather_small_text"
+            style="@style/Weather_small_text_style"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

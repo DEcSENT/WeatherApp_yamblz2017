@@ -60,12 +60,12 @@ public class GoogleSuggestRepositoryTest {
 
     @Test
     public void test_getCityCoordinates() throws Exception {
-        when(googlePlacesApi.getDetailPlaceInfo(anyString(), anyString()))
+        when(googlePlacesApi.getDetailPlaceInfo(anyString(), anyString(), anyString()))
                 .thenReturn(Single.just(detailCityInfo));
 
         City testCity = new City("Москва", new Location(55.755826, 37.6173));
 
-        TestObserver<City> cityCoordinatesTestObserver = googlePlacesApi.getDetailPlaceInfo(anyString(), anyString())
+        TestObserver<City> cityCoordinatesTestObserver = googlePlacesApi.getDetailPlaceInfo(anyString(), anyString(), anyString())
                 .map((coords) -> {
                     LocationCity loc = coords.getResult().getGeometry().getLocationCity();
                     return new City(coords.getResult().getName(), new Location(loc.getLat(), loc.getLng()));

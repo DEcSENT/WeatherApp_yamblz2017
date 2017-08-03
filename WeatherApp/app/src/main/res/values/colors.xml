@@ -7,7 +7,7 @@
     <color name="colorSmallWeatherText">#ffffff</color>
     <color name="colorCityName">#ffffff</color>
 
-    <!--Colors set fot backgrounds-->
+    <!--Colors set fot backgrounds gradient-->
     <color name="colorTopNight">#0b001d</color>
     <color name="colorTopDay">#006fff</color>
     <color name="colorTopEvening">#000471</color>
@@ -17,4 +17,7 @@
     <color name="colorBottomEvening">#ff8f27</color>
     <color name="colorBottomMorning">#393dff</color>
 
+    <color name="colorSettingsBackground">#f2f2f2</color>
+    <color name="colorSettingsBackground2">#ffffff</color>
+    <color name="colorSettingsText">#000000</color>
 </resources>
