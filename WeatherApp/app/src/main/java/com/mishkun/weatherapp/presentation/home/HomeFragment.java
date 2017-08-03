@@ -132,7 +132,7 @@ public class HomeFragment extends Fragment implements WeatherView {
         Log.v("CityName", "CLick!");
         FragmentManager fm = getFragmentManager();
         fm.beginTransaction()
-                .add(R.id.content, new SuggestFragment(), "SuggestFragment")
+                .add(R.id.fragmentContainer, new SuggestFragment(), "SuggestFragment")
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .commit();
     }

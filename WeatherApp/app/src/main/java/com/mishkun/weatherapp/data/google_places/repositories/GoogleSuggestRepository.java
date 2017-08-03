@@ -35,7 +35,7 @@ public class GoogleSuggestRepository implements SuggestRepository {
 
     @Override
     public Single<City> getCityCoordinates(String cityID) {
-        return googlePlacesApi.getDetailPlaceInfo(cityID, API_KEY_GOOGLE)
+        return googlePlacesApi.getDetailPlaceInfo(cityID, API_KEY_GOOGLE, "ru")
                 .map((coords) -> {
                     LocationCity loc = coords.getResult().getGeometry().getLocationCity();
                     //Log.v("CITY NAME, WTF?!", coords.getResult().getName());

@@ -16,5 +16,5 @@ public interface GooglePlacesApi {
     Single<CitiesSuggest> getSuggest(@Query("input") String input, @Query("types") String types, @Query("key") String key);
 
     @GET("maps/api/place/details/json")
-    Single<DetailCityInfo> getDetailPlaceInfo(@Query("placeid") String placeid, @Query("key") String key);
+    Single<DetailCityInfo> getDetailPlaceInfo(@Query("placeid") String placeid, @Query("key") String key, @Query("language") String lang);
 }

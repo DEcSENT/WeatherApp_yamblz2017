@@ -36,6 +36,9 @@ import butterknife.ButterKnife;
 import io.reactivex.Observable;
 
 public class SuggestFragment extends Fragment implements SuggestView{
+    public static final String TAG = SuggestFragment.class.getSimpleName();
+    private static final int TIME_DELAY = 1000;
+
     @BindView(R.id.citySuggestEditText) EditText citySuggestEditText;
     @BindView(R.id.recyclerView) RecyclerView suggestRecyclerView;
 
@@ -91,7 +94,7 @@ public class SuggestFragment extends Fragment implements SuggestView{
     public void setRxTextChangerListener(){
         Observable<String> cityObservable = RxTextView.textChanges(citySuggestEditText)
                 .filter(charSequence -> charSequence.length() > 1)
-                .debounce(1000, TimeUnit.MILLISECONDS)
+                .debounce(TIME_DELAY, TimeUnit.MILLISECONDS)
                 .map(CharSequence::toString);
         cityObservable.subscribe(string -> suggestPresenter.getSuggestFromWeb(string));
     }

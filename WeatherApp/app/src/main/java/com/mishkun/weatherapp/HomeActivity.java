@@ -3,6 +3,7 @@ package com.mishkun.weatherapp;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -52,20 +53,29 @@ public class HomeActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction transaction = fm.beginTransaction();
-        if (savedInstanceState == null) {
-            transaction.replace(R.id.content, new HomeFragment(), HomeFragment.TAG).commit();
-        }
+//        FragmentManager fm = getSupportFragmentManager();
+//        FragmentTransaction transaction = fm.beginTransaction();
+//        if (savedInstanceState == null) {
+//            transaction.replace(R.id.content, new HomeFragment(), HomeFragment.TAG).commit();
+//        }
         weatherScreenComponent = ((HasComponent<AppComponent>) getApplication()).getComponent().weatherScreenComponent();
         weatherScreenComponent.inject(this);
+
+        if (savedInstanceState == null) {
+            showFragment(new HomeFragment());
+        }
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        if (drawer.isDrawerOpen(GravityCompat.START)) {
+//            drawer.closeDrawer(GravityCompat.START);
+//        } else {
+//            super.onBackPressed();
+//        }
+        if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
+            finish();
         } else {
             super.onBackPressed();
         }
@@ -81,13 +91,16 @@ public class HomeActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        FragmentManager fm = getSupportFragmentManager();
+        //FragmentManager fm = getSupportFragmentManager();
         if (id == R.id.nav_home) {
-            fm.beginTransaction().replace(R.id.content, new HomeFragment(), HomeFragment.TAG).commit();
+            //fm.beginTransaction().replace(R.id.fragmentContainer, new HomeFragment(), HomeFragment.TAG).commit();
+            showFragment(new HomeFragment());
         } else if (id == R.id.nav_settings) {
-            fm.beginTransaction().replace(R.id.content, new SettingsFragment(), SettingsFragment.TAG).commit();
+            //fm.beginTransaction().replace(R.id.fragmentContainer, new SettingsFragment(), SettingsFragment.TAG).commit();
+            showFragment(new SettingsFragment());
         } else if (id == R.id.nav_about) {
-            fm.beginTransaction().replace(R.id.content, new AboutFragment(), AboutFragment.TAG).commit();
+            //fm.beginTransaction().replace(R.id.fragmentContainer, new AboutFragment(), AboutFragment.TAG).commit();
+            showFragment(new AboutFragment());
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -110,7 +123,7 @@ public class HomeActivity extends AppCompatActivity
         SimpleDateFormat sdf = new SimpleDateFormat("HH", Locale.getDefault());
         int currentHour = Integer.parseInt(sdf.format(date));
         Log.v("time", currentHour+"");
-        if(currentHour > 0 & currentHour < 6){
+        if(currentHour >= 0 & currentHour < 6){
             toolbar.setBackgroundResource(R.color.colorTopNight);
         } else if(currentHour >= 6 & currentHour <= 10){
             toolbar.setBackgroundResource(R.color.colorTopMorning);
@@ -120,6 +133,20 @@ public class HomeActivity extends AppCompatActivity
             toolbar.setBackgroundResource(R.color.colorTopEvening);
         } else {
             toolbar.setBackgroundResource(R.color.colorAccent);
+        }
+    }
+
+    public void showFragment(Fragment fragment) {
+        String backStateName = fragment.getClass().getName();
+        FragmentManager manager = getSupportFragmentManager();
+        boolean fragmentPopped = manager.popBackStackImmediate(backStateName, 0);
+
+        if (!fragmentPopped && manager.findFragmentByTag(backStateName) == null) { //fragment not in back stack, create it.
+            FragmentTransaction ft = manager.beginTransaction();
+            ft.replace(R.id.fragmentContainer, fragment, backStateName);
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            ft.addToBackStack(backStateName);
+            ft.commit();
         }
     }
 }
