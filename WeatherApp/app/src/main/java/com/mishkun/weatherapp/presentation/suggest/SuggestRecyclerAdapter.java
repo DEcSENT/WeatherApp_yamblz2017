@@ -22,10 +22,12 @@ public class SuggestRecyclerAdapter extends RecyclerView.Adapter<SuggestRecycler
     SuggestFragment.onClickRecyclerItem onClickRecyclerItem;
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
-        public TextView title;
+        private TextView cityTextView;
+        private TextView countryTextView;
         public MyViewHolder(View view) {
             super(view);
-            title = (TextView) view.findViewById(R.id.cityTextView);
+            cityTextView = (TextView) view.findViewById(R.id.cityTextView);
+            countryTextView = (TextView) view.findViewById(R.id.countryTextView);
         }
     }
 
@@ -53,7 +55,11 @@ public class SuggestRecyclerAdapter extends RecyclerView.Adapter<SuggestRecycler
                 view -> {
                     Log.v("ONCLICK", pred.getPlaceId());
         });
-        holder.title.setText(pred.getDescription());
+        String predCity = pred.getDescription();
+        String city = predCity.contains(",") ? predCity.substring(0, predCity.indexOf(",")) : predCity;
+        String country = predCity.contains(",") ? predCity.substring(predCity.indexOf(",")+2, predCity.length()) : predCity;
+        holder.cityTextView.setText(city);
+        holder.countryTextView.setText(country);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

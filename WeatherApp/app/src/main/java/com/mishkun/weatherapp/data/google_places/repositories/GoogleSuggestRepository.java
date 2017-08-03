@@ -15,6 +15,7 @@ import com.mishkun.weatherapp.data.google_places.citiesSuggest.Prediction;
 
 
 import java.util.List;
+import java.util.Locale;
 
 import io.reactivex.Single;
 
@@ -35,7 +36,7 @@ public class GoogleSuggestRepository implements SuggestRepository {
 
     @Override
     public Single<City> getCityCoordinates(String cityID) {
-        return googlePlacesApi.getDetailPlaceInfo(cityID, API_KEY_GOOGLE, "ru")
+        return googlePlacesApi.getDetailPlaceInfo(cityID, API_KEY_GOOGLE, Locale.getDefault().toString())
                 .map((coords) -> {
                     LocationCity loc = coords.getResult().getGeometry().getLocationCity();
                     //Log.v("CITY NAME, WTF?!", coords.getResult().getName());
