@@ -74,10 +74,9 @@ public class WeatherRxPresenter extends RxPresenter<WeatherView> {
         long time = System.currentTimeMillis();
         Date date = new Date(time);
         SimpleDateFormat sdf = new SimpleDateFormat("HH", Locale.getDefault());
-        //sdf.setTimeZone(TimeZone.getTimeZone("GMT+3"));
         int currentHour = Integer.parseInt(sdf.format(date));
         Log.v("time", currentHour + "");
-        if (currentHour > 0 & currentHour < 6) {
+        if (currentHour >= 0 & currentHour < 6) {
             return R.drawable.gradient_night;
         } else if (currentHour >= 6 & currentHour <= 10) {
             return R.drawable.gradient_morning;

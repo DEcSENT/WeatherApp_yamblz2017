@@ -54,4 +54,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView"/>
     </android.support.constraint.ConstraintLayout>
+
+        <Button
+            style="@style/Settings_about_button_style"
+            android:text="@string/about_button"
+            android:onClick="onClickAbout"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="8dp"/>
 </android.support.constraint.ConstraintLayout>

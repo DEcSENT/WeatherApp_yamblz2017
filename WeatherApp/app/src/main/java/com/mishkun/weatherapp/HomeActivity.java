@@ -1,40 +1,37 @@
 package com.mishkun.weatherapp;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.mishkun.weatherapp.di.AppComponent;
 import com.mishkun.weatherapp.di.HasComponent;
 import com.mishkun.weatherapp.di.WeatherScreenComponent;
-import com.mishkun.weatherapp.presentation.AboutFragment;
-import com.mishkun.weatherapp.presentation.home.HomeFragment;
-import com.mishkun.weatherapp.presentation.settings.SettingsFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
 public class HomeActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, HasComponent<WeatherScreenComponent> {
+        implements HasComponent<WeatherScreenComponent> {
 
     private WeatherScreenComponent weatherScreenComponent;
     private Toolbar toolbar;
+
+    public HomePres homePresenter;
 
     @Override
     protected void onResume() {
         super.onResume();
         setBackground();
+    }
+
+    public HomeActivity(){
+
     }
 
     @Override
@@ -44,40 +41,45 @@ public class HomeActivity extends AppCompatActivity
         setContentView(R.layout.activity_home);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
-//        FragmentManager fm = getSupportFragmentManager();
-//        FragmentTransaction transaction = fm.beginTransaction();
-//        if (savedInstanceState == null) {
-//            transaction.replace(R.id.content, new HomeFragment(), HomeFragment.TAG).commit();
-//        }
         weatherScreenComponent = ((HasComponent<AppComponent>) getApplication()).getComponent().weatherScreenComponent();
         weatherScreenComponent.inject(this);
 
+        homePresenter = new HomePresenter(getSupportFragmentManager());
+        homePresenter.attachView(this);
         if (savedInstanceState == null) {
-            showFragment(new HomeFragment());
+            homePresenter.openWeatherFragment();
         }
     }
 
     @Override
     public void onBackPressed() {
-//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        if (drawer.isDrawerOpen(GravityCompat.START)) {
-//            drawer.closeDrawer(GravityCompat.START);
-//        } else {
-//            super.onBackPressed();
-//        }
         if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
             finish();
         } else {
             super.onBackPressed();
+        }
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_home_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.weatherIcon:
+                homePresenter.openWeatherFragment();
+                return true;
+            case R.id.settingsIcon:
+                homePresenter.openSettingsFragment();
+                return true;
+            case R.id.falouriteIcon:
+                homePresenter.openSelectCityFragment();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 
@@ -87,30 +89,10 @@ public class HomeActivity extends AppCompatActivity
     }
 
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        //FragmentManager fm = getSupportFragmentManager();
-        if (id == R.id.nav_home) {
-            //fm.beginTransaction().replace(R.id.fragmentContainer, new HomeFragment(), HomeFragment.TAG).commit();
-            showFragment(new HomeFragment());
-        } else if (id == R.id.nav_settings) {
-            //fm.beginTransaction().replace(R.id.fragmentContainer, new SettingsFragment(), SettingsFragment.TAG).commit();
-            showFragment(new SettingsFragment());
-        } else if (id == R.id.nav_about) {
-            //fm.beginTransaction().replace(R.id.fragmentContainer, new AboutFragment(), AboutFragment.TAG).commit();
-            showFragment(new AboutFragment());
-        }
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
-
-    @Override
     protected void onDestroy() {
         super.onDestroy();
         weatherScreenComponent = null;
+        homePresenter.detachView();
     }
 
     @Override
@@ -136,17 +118,13 @@ public class HomeActivity extends AppCompatActivity
         }
     }
 
-    public void showFragment(Fragment fragment) {
-        String backStateName = fragment.getClass().getName();
-        FragmentManager manager = getSupportFragmentManager();
-        boolean fragmentPopped = manager.popBackStackImmediate(backStateName, 0);
+    /*Click on About button in settings fragment.*/
+    public void onClickAbout(View view) {
+        homePresenter.openAboutFragment();
+    }
 
-        if (!fragmentPopped && manager.findFragmentByTag(backStateName) == null) { //fragment not in back stack, create it.
-            FragmentTransaction ft = manager.beginTransaction();
-            ft.replace(R.id.fragmentContainer, fragment, backStateName);
-            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-            ft.addToBackStack(backStateName);
-            ft.commit();
-        }
+    /*Click on Add button in Favourite fragment. */
+    public void onClickAddNewCity(View view) {
+        homePresenter.openSuggestFragment();
     }
 }

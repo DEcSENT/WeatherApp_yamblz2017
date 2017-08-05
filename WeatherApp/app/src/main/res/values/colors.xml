@@ -20,4 +20,6 @@
     <color name="colorSettingsBackground">#f2f2f2</color>
     <color name="colorSettingsBackground2">#ffffff</color>
     <color name="colorSettingsText">#000000</color>
+
+    <color name="colorSuggestElementsBackground">#ffffff</color>
 </resources>

@@ -18,9 +18,10 @@ import java.util.Date;
 import io.reactivex.Completable;
 import io.reactivex.Observable;
 
+import static com.mishkun.weatherapp.Constants.API_KEY_WEATHER;
+
 public class OpenWeatherMapCurrentWeatherRepository implements CurrentWeatherProvider {
     private static final String TAG = OpenWeatherMapCurrentWeatherRepository.class.getSimpleName();
-    private final String API_KEY = "a94b47f30f78afba43ac68effc69a24a";
     private final OpenWeatherMapApi openWeatherMapApi;
     // to not to include room or other ORM now, I use this dirty hack
     private final BehaviorRelay<Weather> weatherBehaviorSubject;
@@ -50,7 +51,7 @@ public class OpenWeatherMapCurrentWeatherRepository implements CurrentWeatherPro
 
     @Override
     public Completable refreshData(@NonNull Location location) {
-        return Completable.fromObservable(openWeatherMapApi.getWeather(location.getLatitude(), location.getLongitude(), API_KEY)
+        return Completable.fromObservable(openWeatherMapApi.getWeather(location.getLatitude(), location.getLongitude(), API_KEY_WEATHER)
                 .doOnNext(this::cacheIt)
                 .map((weatherRaw) -> WeatherRawMapper.toDomain(weatherRaw, new Date().getTime()))
                 .doOnNext(weatherBehaviorSubject));

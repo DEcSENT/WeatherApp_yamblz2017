@@ -37,7 +37,6 @@ import io.reactivex.functions.Consumer;
 public class HomeFragment extends Fragment implements WeatherView {
     public static final String TAG = HomeFragment.class.getSimpleName();
 
-
     @BindView(R.id.degreesTextView)
     public TextView degreesView;
     @BindView(R.id.humidityTextView)
@@ -46,7 +45,7 @@ public class HomeFragment extends Fragment implements WeatherView {
     public TextView windView;
     @BindView(R.id.pressureTextView)
     public TextView pressureView;
-    @BindView(R.id.weatherFragment)
+    @BindView(R.id.swipetoRefreshLayout)
     public SwipeRefreshLayout swipeRefreshLayout;
     @BindView(R.id.iconWeatherImageView)
     public ImageView imageView;
@@ -69,7 +68,7 @@ public class HomeFragment extends Fragment implements WeatherView {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_weather, container, false);
+        View view = inflater.inflate(R.layout.asd, container, false);
         ButterKnife.bind(this, view);
         return view;
     }
@@ -79,7 +78,7 @@ public class HomeFragment extends Fragment implements WeatherView {
         super.onViewCreated(view, savedInstanceState);
         ActionBar supportActionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         if (supportActionBar != null) {
-            supportActionBar.setTitle(R.string.home_title);
+            supportActionBar.setTitle(R.string.weather_title);
         }
 
     }
@@ -125,15 +124,5 @@ public class HomeFragment extends Fragment implements WeatherView {
     @SuppressWarnings("unchecked")
     public Consumer<Boolean> getLoadingStatusConsumer() {
         return (Consumer<Boolean>) RxSwipeRefreshLayout.refreshing(swipeRefreshLayout);
-    }
-
-    @OnClick(R.id.cityTextView)
-    public void giveMeSuggest(){
-        Log.v("CityName", "CLick!");
-        FragmentManager fm = getFragmentManager();
-        fm.beginTransaction()
-                .add(R.id.fragmentContainer, new SuggestFragment(), "SuggestFragment")
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                .commit();
     }
 }

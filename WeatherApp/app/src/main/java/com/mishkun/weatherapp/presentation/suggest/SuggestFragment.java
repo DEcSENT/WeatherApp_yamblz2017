@@ -3,9 +3,11 @@ package com.mishkun.weatherapp.presentation.suggest;
  * Created by DV on Space 5 
  * 24.07.2017
  */
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -35,7 +37,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.Observable;
 
-public class SuggestFragment extends Fragment implements SuggestView{
+public class SuggestFragment extends DialogFragment implements SuggestView{
     public static final String TAG = SuggestFragment.class.getSimpleName();
     private static final int TIME_DELAY = 1000;
 

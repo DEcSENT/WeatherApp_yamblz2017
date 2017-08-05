@@ -21,7 +21,7 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
-    <style name="Weather_small_text_style">
+    <style name="Weather_small_elements_text_style">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">16sp</item>
@@ -46,9 +46,16 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/settingsCardHeight</item>
         <item name="android:background">@color/colorSettingsBackground2</item>
-        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:layout_marginTop">8dp</item>
         <item name="android:layout_marginStart">0dp</item>
         <item name="android:layout_marginEnd">0dp</item>
+    </style>
+
+    <style name="Settings_about_button_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:background">@color/colorPrimary</item>
     </style>
 
 </resources>

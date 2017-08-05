@@ -4,8 +4,6 @@ package com.mishkun.weatherapp.data.google_places.repositories;
  * 25.07.2017
  */
 
-import android.util.Log;
-
 import com.mishkun.weatherapp.data.google_places.GooglePlacesApi;
 import com.mishkun.weatherapp.data.google_places.detailCityInfo.LocationCity;
 import com.mishkun.weatherapp.domain.entities.City;
@@ -19,10 +17,12 @@ import java.util.Locale;
 
 import io.reactivex.Single;
 
+import static com.mishkun.weatherapp.Constants.API_KEY_GOOGLE;
+
 public class GoogleSuggestRepository implements SuggestRepository {
 
     private final GooglePlacesApi googlePlacesApi;
-    private static final String API_KEY_GOOGLE = "AIzaSyCnAOvg2liBhZVM72RQB8k201ehUYv4AMc";
+    //private static final String API_KEY_GOOGLE = "AIzaSyCnAOvg2liBhZVM72RQB8k201ehUYv4AMc";
 
     public GoogleSuggestRepository(GooglePlacesApi googlePlacesApi) {
         this.googlePlacesApi = googlePlacesApi;

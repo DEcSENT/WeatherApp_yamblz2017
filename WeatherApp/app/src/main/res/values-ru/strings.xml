@@ -21,6 +21,7 @@
     <string name="windIcon_description_text">Иконка ветра</string>
     <string name="humidityIcon_description_text">Иконка влажности</string>
     <string name="pressureIcon_description_text">Иконка давления</string>
+    <string name="yandexIcon_description_text">Логотип Яндекса</string>
 
     <string name="wind_string">Ветер</string>
     <string name="pressure_string">Давление</string>
@@ -29,4 +30,11 @@
     <string name="icon_author_credit">Icons made by RNS from www.flaticon.com is licensed by CC 3.0 BY</string>
 
     <string name="autoupdate_weather_text">Автообновление</string>
+
+    <string name="favourite_title">Города</string>
+    <string name="weather_title">Погода</string>
+
+    <string name="about_button">О приложении</string>
+
+    <string name="cities_hint">Введите название города</string>
 </resources>
