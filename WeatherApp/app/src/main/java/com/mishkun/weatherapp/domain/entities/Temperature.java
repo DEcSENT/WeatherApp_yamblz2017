@@ -1,9 +1,5 @@
 package com.mishkun.weatherapp.domain.entities;
 
-/**
- * Created by Mishkun on 14.07.2017.
- */
-
 public class Temperature {
     private final double kelvinDegrees;
 
@@ -26,5 +22,21 @@ public class Temperature {
 
     public double getCelsiusDegrees(){
         return kelvinDegrees - 273;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Temperature that = (Temperature) o;
+
+        return Double.compare(that.kelvinDegrees, kelvinDegrees) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        long temp = Double.doubleToLongBits(kelvinDegrees);
+        return (int) (temp ^ (temp >>> 32));
     }
 }

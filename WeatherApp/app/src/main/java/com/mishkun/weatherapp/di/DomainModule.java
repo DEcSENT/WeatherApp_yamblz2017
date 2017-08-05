@@ -12,10 +12,6 @@ import io.reactivex.schedulers.Schedulers;
 import static com.mishkun.weatherapp.di.NamedConsts.JOB;
 import static com.mishkun.weatherapp.di.NamedConsts.UI;
 
-/**
- * Created by Mishkun on 16.07.2017.
- */
-
 @Module
 class DomainModule {
 

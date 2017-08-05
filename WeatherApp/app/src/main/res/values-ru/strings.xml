@@ -10,9 +10,31 @@
     <string name="hello_blank_fragment">Приложение Погода\nАвтор: mishkun</string>
     <string name="time_schedule_preference_summary">Обновлять погоду каждые</string>
     <string name="moscow">Москва</string>
-    <string name="humidity_fmt_string">влажность: %.0f%%</string>
-    <string name="pressure_fmt_string">давление: %.1f мм ртутного столба</string>
+    <string name="humidity_fmt_string">%.0f%%</string>
+    <string name="pressure_fmt_string">%.0f</string>
+    <!--<string name="pressure_fmt_string">%.1f мм рт. ст.</string>-->
     <string name="temperature_fmt_string">%.0f°</string>
-    <string name="wind_fmt_string">ветер: %.1f м/с</string>
+    <string name="wind_fmt_string">%.1f м/с</string>
     <string name="refresh_weather_setting">Обновлять погоду каждые</string>
+
+    <string name="weatherIcon_description_text">Иконка погоды</string>
+    <string name="windIcon_description_text">Иконка ветра</string>
+    <string name="humidityIcon_description_text">Иконка влажности</string>
+    <string name="pressureIcon_description_text">Иконка давления</string>
+    <string name="yandexIcon_description_text">Логотип Яндекса</string>
+
+    <string name="wind_string">Ветер</string>
+    <string name="pressure_string">Давление</string>
+    <string name="humidity_string">Влажность</string>
+
+    <string name="icon_author_credit">Icons made by RNS from www.flaticon.com is licensed by CC 3.0 BY</string>
+
+    <string name="autoupdate_weather_text">Автообновление</string>
+
+    <string name="favourite_title">Города</string>
+    <string name="weather_title">Погода</string>
+
+    <string name="about_button">О приложении</string>
+
+    <string name="cities_hint">Введите название города</string>
 </resources>

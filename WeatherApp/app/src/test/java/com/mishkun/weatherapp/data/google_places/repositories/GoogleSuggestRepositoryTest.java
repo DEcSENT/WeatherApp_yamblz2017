@@ -2,6 +2,7 @@ package com.mishkun.weatherapp.data.google_places.repositories;
 
 import com.google.gson.Gson;
 import com.mishkun.weatherapp.data.google_places.GooglePlacesApi;
+import com.mishkun.weatherapp.data.google_places.detailCityInfo.LocationCity;
 import com.mishkun.weatherapp.domain.entities.City;
 import com.mishkun.weatherapp.domain.entities.Location;
 import com.mishkun.weatherapp.data.google_places.citiesSuggest.CitiesSuggest;
@@ -59,14 +60,14 @@ public class GoogleSuggestRepositoryTest {
 
     @Test
     public void test_getCityCoordinates() throws Exception {
-        when(googlePlacesApi.getDetailPlaceInfo(anyString(), anyString()))
+        when(googlePlacesApi.getDetailPlaceInfo(anyString(), anyString(), anyString()))
                 .thenReturn(Single.just(detailCityInfo));
 
         City testCity = new City("Москва", new Location(55.755826, 37.6173));
 
-        TestObserver<City> cityCoordinatesTestObserver = googlePlacesApi.getDetailPlaceInfo(anyString(), anyString())
+        TestObserver<City> cityCoordinatesTestObserver = googlePlacesApi.getDetailPlaceInfo(anyString(), anyString(), anyString())
                 .map((coords) -> {
-                    com.mishkun.weatherapp.data.google_places.detailCityInfo.Location loc = coords.getResult().getGeometry().getLocation();
+                    LocationCity loc = coords.getResult().getGeometry().getLocationCity();
                     return new City(coords.getResult().getName(), new Location(loc.getLat(), loc.getLng()));
                 }).test();
 

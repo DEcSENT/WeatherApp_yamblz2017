@@ -10,9 +10,31 @@
     <string name="home_title">Main</string>
     <string name="hello_blank_fragment">WeatherApp\nAuthor: mishkun</string>
     <string name="moscow">Moscow</string>
-    <string name="wind_fmt_string">wind: %.1f m/s</string>
+    <string name="wind_fmt_string">%.1f m/s</string>
     <string name="temperature_fmt_string">%.0f°</string>
-    <string name="pressure_fmt_string">pressure: %.1f mm Hg</string>
-    <string name="humidity_fmt_string">humidity: %.0f%%</string>
+    <string name="pressure_fmt_string">%.0f</string>
+    <!--<string name="pressure_fmt_string">%.1f mm Hg</string>-->
+    <string name="humidity_fmt_string">%.0f%%</string>
     <string name="refresh_weather_setting">Refresh weather every</string>
+
+    <string name="weatherIcon_description_text">Weather icon</string>
+    <string name="windIcon_description_text">Wind icon</string>
+    <string name="humidityIcon_description_text">Humidity icon</string>
+    <string name="pressureIcon_description_text">Pressure icon</string>
+    <string name="yandexIcon_description_text">Yandex icon</string>
+
+    <string name="wind_string">Wind</string>
+    <string name="pressure_string">Pressure</string>
+    <string name="humidity_string">Humidity</string>
+
+    <string name="icon_author_credit">Icons made by RNS from www.flaticon.com is licensed by CC 3.0 BY</string>
+
+    <string name="autoupdate_weather_text">Auto-update</string>
+
+    <string name="favourite_title">Cities</string>
+    <string name="weather_title">Weather</string>
+
+    <string name="about_button">About application</string>
+
+    <string name="cities_hint">Enter city name</string>
 </resources>

@@ -1,23 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/suggestFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".HomeActivity"
-    android:background="#ffffff"
-    android:id="@+id/suggestFragment">
+    android:padding="16dp"
+    tools:context=".HomeActivity">
 
-    <EditText
-        android:id="@+id/citySuggestEditText"
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Название города"/>
+        android:background="@color/colorSuggestElementsBackground">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/citySuggestEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/cities_hint"
+            android:imeOptions="actionDone"
+            android:inputType="textCapSentences"
+            android:textColor="@color/colorPrimary"/>
+    </android.support.design.widget.TextInputLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:background="@color/colorSuggestElementsBackground"/>
 </LinearLayout>

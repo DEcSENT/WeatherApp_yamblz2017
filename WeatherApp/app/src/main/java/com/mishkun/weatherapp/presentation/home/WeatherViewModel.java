@@ -3,10 +3,6 @@ package com.mishkun.weatherapp.presentation.home;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 
-/**
- * Created by Mishkun on 21.07.2017.
- */
-
 class WeatherViewModel {
     private final String humidityText;
     private final String pressureText;

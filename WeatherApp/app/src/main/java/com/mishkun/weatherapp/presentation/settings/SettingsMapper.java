@@ -9,9 +9,6 @@ import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
-/**
- * Created by Mishkun on 19.07.2017.
- */
 @SettingsScreen
 public class SettingsMapper {
     private final int[] refreshRateMapping;

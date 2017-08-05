@@ -3,9 +3,11 @@ package com.mishkun.weatherapp.presentation.suggest;
  * Created by DV on Space 5 
  * 24.07.2017
  */
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -35,7 +37,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.Observable;
 
-public class SuggestFragment extends Fragment implements SuggestView{
+public class SuggestFragment extends DialogFragment implements SuggestView{
+    public static final String TAG = SuggestFragment.class.getSimpleName();
+    private static final int TIME_DELAY = 1000;
+
     @BindView(R.id.citySuggestEditText) EditText citySuggestEditText;
     @BindView(R.id.recyclerView) RecyclerView suggestRecyclerView;
 
@@ -61,7 +66,7 @@ public class SuggestFragment extends Fragment implements SuggestView{
         setRxTextChangerListener();
 
         List<Prediction> list = new ArrayList<>();
-        list.add(new Prediction("", "", ""));
+        list.add(new Prediction("Москва", "ChIJybDUc_xKtUYRTM9XV8zWRD0", "ChIJybDUc_xKtUYRTM9XV8zWRD0"));
         suggestRecyclerAdapter = new SuggestRecyclerAdapter(list, new onClickRecyclerItem() {
             @Override
             public void onclick(Prediction prediction) {
@@ -89,11 +94,11 @@ public class SuggestFragment extends Fragment implements SuggestView{
     }
 
     public void setRxTextChangerListener(){
-        Observable<String> obs = RxTextView.textChanges(citySuggestEditText)
+        Observable<String> cityObservable = RxTextView.textChanges(citySuggestEditText)
                 .filter(charSequence -> charSequence.length() > 1)
-                .debounce(1000, TimeUnit.MILLISECONDS)
+                .debounce(TIME_DELAY, TimeUnit.MILLISECONDS)
                 .map(CharSequence::toString);
-        obs.subscribe(string -> suggestPresenter.getSuggestFromWeb(string));
+        cityObservable.subscribe(string -> suggestPresenter.getSuggestFromWeb(string));
     }
 
     @Override

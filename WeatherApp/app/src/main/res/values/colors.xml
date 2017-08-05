@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#50c8ef</color>
+    <color name="colorPrimary">#ffcc00</color>
     <color name="colorPrimaryDark">#1ea6c6</color>
     <color name="colorAccent">#ffc400</color>
+
+    <color name="colorSmallWeatherText">#ffffff</color>
+    <color name="colorCityName">#ffffff</color>
+
+    <!--Colors set fot backgrounds gradient-->
+    <color name="colorTopNight">#0b001d</color>
+    <color name="colorTopDay">#006fff</color>
+    <color name="colorTopEvening">#000471</color>
+    <color name="colorTopMorning">#12003c</color>
+    <color name="colorBottomNight">#1d154d</color>
+    <color name="colorBottomDay">#ffa322</color>
+    <color name="colorBottomEvening">#ff8f27</color>
+    <color name="colorBottomMorning">#393dff</color>
+
+    <color name="colorSettingsBackground">#f2f2f2</color>
+    <color name="colorSettingsBackground2">#ffffff</color>
+    <color name="colorSettingsText">#000000</color>
+
+    <color name="colorSuggestElementsBackground">#ffffff</color>
 </resources>

@@ -1,34 +1,37 @@
 package com.mishkun.weatherapp;
 
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.mishkun.weatherapp.di.AppComponent;
 import com.mishkun.weatherapp.di.HasComponent;
 import com.mishkun.weatherapp.di.WeatherScreenComponent;
-import com.mishkun.weatherapp.presentation.AboutFragment;
-import com.mishkun.weatherapp.presentation.home.HomeFragment;
-import com.mishkun.weatherapp.presentation.settings.SettingsFragment;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class HomeActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, HasComponent<WeatherScreenComponent> {
-
+        implements HasComponent<WeatherScreenComponent> {
 
     private WeatherScreenComponent weatherScreenComponent;
+    private Toolbar toolbar;
+
+    public HomePres homePresenter;
 
     @Override
     protected void onResume() {
         super.onResume();
+        setBackground();
+    }
+
+    public HomeActivity(){
+
     }
 
     @Override
@@ -36,33 +39,47 @@ public class HomeActivity extends AppCompatActivity
         setTheme(R.style.AppTheme_NoActionBar);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction transaction = fm.beginTransaction();
-        if (savedInstanceState == null) {
-            transaction.replace(R.id.content, new HomeFragment(), HomeFragment.TAG).commit();
-        }
         weatherScreenComponent = ((HasComponent<AppComponent>) getApplication()).getComponent().weatherScreenComponent();
         weatherScreenComponent.inject(this);
+
+        homePresenter = new HomePresenter(getSupportFragmentManager());
+        homePresenter.attachView(this);
+        if (savedInstanceState == null) {
+            homePresenter.openWeatherFragment();
+        }
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
+        if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
+            finish();
         } else {
             super.onBackPressed();
+        }
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_home_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.weatherIcon:
+                homePresenter.openWeatherFragment();
+                return true;
+            case R.id.settingsIcon:
+                homePresenter.openSettingsFragment();
+                return true;
+            case R.id.falouriteIcon:
+                homePresenter.openSelectCityFragment();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 
@@ -72,31 +89,42 @@ public class HomeActivity extends AppCompatActivity
     }
 
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        FragmentManager fm = getSupportFragmentManager();
-        if (id == R.id.nav_home) {
-            fm.beginTransaction().replace(R.id.content, new HomeFragment(), HomeFragment.TAG).commit();
-        } else if (id == R.id.nav_settings) {
-            fm.beginTransaction().replace(R.id.content, new SettingsFragment(), SettingsFragment.TAG).commit();
-        } else if (id == R.id.nav_about) {
-            fm.beginTransaction().replace(R.id.content, new AboutFragment(), AboutFragment.TAG).commit();
-        }
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
-
-    @Override
     protected void onDestroy() {
         super.onDestroy();
         weatherScreenComponent = null;
+        homePresenter.detachView();
     }
 
     @Override
     public WeatherScreenComponent getComponent() {
         return weatherScreenComponent;
+    }
+    private void setBackground() {
+        long time = System.currentTimeMillis();
+        Date date = new Date(time);
+        SimpleDateFormat sdf = new SimpleDateFormat("HH", Locale.getDefault());
+        int currentHour = Integer.parseInt(sdf.format(date));
+        Log.v("time", currentHour+"");
+        if(currentHour >= 0 & currentHour < 6){
+            toolbar.setBackgroundResource(R.color.colorTopNight);
+        } else if(currentHour >= 6 & currentHour <= 10){
+            toolbar.setBackgroundResource(R.color.colorTopMorning);
+        } else if(currentHour > 10 & currentHour <= 19){
+            toolbar.setBackgroundResource(R.color.colorTopDay);
+        } else if(currentHour > 19){
+            toolbar.setBackgroundResource(R.color.colorTopEvening);
+        } else {
+            toolbar.setBackgroundResource(R.color.colorAccent);
+        }
+    }
+
+    /*Click on About button in settings fragment.*/
+    public void onClickAbout(View view) {
+        homePresenter.openAboutFragment();
+    }
+
+    /*Click on Add button in Favourite fragment. */
+    public void onClickAddNewCity(View view) {
+        homePresenter.openSuggestFragment();
     }
 }

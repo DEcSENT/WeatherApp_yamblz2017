@@ -11,9 +11,6 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 
-/**
- * Created by Mishkun on 19.07.2017.
- */
 @Module
 class WeatherSchedulerModule {
     @Provides

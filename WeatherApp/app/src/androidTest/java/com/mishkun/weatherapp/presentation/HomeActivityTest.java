@@ -35,9 +35,9 @@ public class HomeActivityTest{
 
     @Test
     public void clickCityName(){
-        onView(withId(R.id.swiperefresh)).check(matches(is(isDisplayed())));
+        onView(withId(R.id.weatherFragment)).check(matches(is(isDisplayed())));
         // This may produce NPE
-        onView(ViewMatchers.withId(R.id.city_text_view)).perform(click());
+        onView(ViewMatchers.withId(R.id.cityTextView)).perform(click());
     }
 
     @Test
@@ -52,7 +52,7 @@ public class HomeActivityTest{
         freezeTimeMethod();
         onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
         onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_home));
-        onView(withId(R.id.swiperefresh)).check(matches(is(isDisplayed())));
+        onView(withId(R.id.weatherFragment)).check(matches(is(isDisplayed())));
         freezeTimeMethod();
     }
 

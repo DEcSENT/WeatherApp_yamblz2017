@@ -6,10 +6,6 @@ import com.mishkun.weatherapp.domain.interactors.UpdateWeather;
 
 import io.reactivex.annotations.Nullable;
 
-/**
- * Created by Mishkun on 16.07.2017.
- */
-
 public class WeatherJobCreator implements JobCreator {
 
     private final UpdateWeather updateWeather;

@@ -1,7 +1,10 @@
 package com.mishkun.weatherapp.presentation.home;
 
+import android.util.Log;
+
 import com.jakewharton.rxrelay2.BehaviorRelay;
 import com.jakewharton.rxrelay2.PublishRelay;
+import com.mishkun.weatherapp.R;
 import com.mishkun.weatherapp.di.WeatherScreen;
 import com.mishkun.weatherapp.domain.entities.Location;
 import com.mishkun.weatherapp.domain.entities.Weather;
@@ -10,13 +13,15 @@ import com.mishkun.weatherapp.domain.interactors.GetWeatherSubscription;
 import com.mishkun.weatherapp.domain.interactors.UpdateWeather;
 import com.mishkun.weatherapp.presentation.RxPresenter;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
+
 import javax.inject.Inject;
 
 import io.reactivex.Completable;
 
-/**
- * Created by Mishkun on 15.07.2017.
- */
 @WeatherScreen
 public class WeatherRxPresenter extends RxPresenter<WeatherView> {
     private static final String TAG = WeatherRxPresenter.class.getSimpleName();
@@ -26,8 +31,6 @@ public class WeatherRxPresenter extends RxPresenter<WeatherView> {
     private BehaviorRelay<Weather> weatherStatus;
     private BehaviorRelay<Boolean> loadingStatus;
     private PublishRelay<String> errorMessages;
-
-    private ApplyCityInfo applyCityInfo;
 
     @Inject
     WeatherRxPresenter(GetWeatherSubscription getWeatherSubscription, UpdateWeather updateWeather,
@@ -42,7 +45,6 @@ public class WeatherRxPresenter extends RxPresenter<WeatherView> {
 
         // MAYBE HERE WILL BE SUBSCRIBE TO REPOSITORY WITH LOCATION? OR INTERACTOR?
     }
-
 
     @Override
     protected void onAttach() {
@@ -66,5 +68,24 @@ public class WeatherRxPresenter extends RxPresenter<WeatherView> {
     @Override
     protected void onDetach() {
 
+    }
+
+    int getBackground() {
+        long time = System.currentTimeMillis();
+        Date date = new Date(time);
+        SimpleDateFormat sdf = new SimpleDateFormat("HH", Locale.getDefault());
+        int currentHour = Integer.parseInt(sdf.format(date));
+        Log.v("time", currentHour + "");
+        if (currentHour >= 0 & currentHour < 6) {
+            return R.drawable.gradient_night;
+        } else if (currentHour >= 6 & currentHour <= 10) {
+            return R.drawable.gradient_morning;
+        } else if (currentHour > 10 & currentHour <= 19) {
+            return R.drawable.gradient_day;
+        } else if (currentHour > 19) {
+            return R.drawable.gradient_evening;
+        } else {
+            return R.color.colorAccent;
+        }
     }
 }

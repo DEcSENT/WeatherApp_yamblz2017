@@ -14,10 +14,6 @@ import io.reactivex.Scheduler;
 import static com.mishkun.weatherapp.di.NamedConsts.JOB;
 import static com.mishkun.weatherapp.di.NamedConsts.UI;
 
-/**
- * Created by Mishkun on 19.07.2017.
- */
-
 public class PutWeatherUpdatesFrequency extends CompletableInteractor<Long> {
     private final UpdatePreferenceProvider updatePreferenceProvider;
 

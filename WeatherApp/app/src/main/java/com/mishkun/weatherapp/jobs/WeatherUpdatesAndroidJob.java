@@ -13,10 +13,6 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Completable;
 
-/**
- * Created by Mishkun on 19.07.2017.
- */
-
 public class WeatherUpdatesAndroidJob implements WeatherUpdatesScheduler {
 
     private static final String TAG = WeatherUpdatesAndroidJob.class.getSimpleName();

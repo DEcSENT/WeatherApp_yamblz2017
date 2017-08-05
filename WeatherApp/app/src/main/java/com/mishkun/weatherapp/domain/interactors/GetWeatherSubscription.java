@@ -16,10 +16,6 @@ import io.reactivex.Scheduler;
 import static com.mishkun.weatherapp.di.NamedConsts.JOB;
 import static com.mishkun.weatherapp.di.NamedConsts.UI;
 
-/**
- * Created by Mishkun on 14.07.2017.
- */
-
 public class GetWeatherSubscription extends ParameterlessInteractor<Weather> {
     private final CurrentWeatherProvider currentWeatherProvider;
     private final CityInfoRepository cityInfoRepository;
@@ -43,7 +39,6 @@ public class GetWeatherSubscription extends ParameterlessInteractor<Weather> {
                                 weather.getWeatherConditions(),
                                 weather.getWindSpeed(),
                                 weather.getTimestamp(),
-                                name)))
-                ;
+                                name)));
     }
 }

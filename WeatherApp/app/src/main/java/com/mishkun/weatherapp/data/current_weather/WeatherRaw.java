@@ -4,14 +4,10 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-/**
- * Created by Mishkun on 14.07.2017.
- */
-
 /*
  * JSON mapper object. See https://openweathermap.org/current#format for details
  */
-class Weather {
+class WeatherRaw {
 
     @SerializedName("wind")
     Wind wind;
@@ -22,11 +18,11 @@ class Weather {
     @SerializedName("main")
     Main main;
 
-    public Weather(){
+    public WeatherRaw(){
 
     }
 
-    public Weather(Wind wind, List<WeatherConditions> weather, Main main) {
+    public WeatherRaw(Wind wind, List<WeatherConditions> weather, Main main) {
         this.wind = wind;
         this.weather = weather;
         this.main = main;

@@ -30,7 +30,7 @@ public class SuggestFragmentTest {
 
     @Test
     public void checkTextView(){
-        onView(ViewMatchers.withId(R.id.city_text_view)).perform(click());
+        onView(ViewMatchers.withId(R.id.cityTextView)).perform(click());
         freezeTimeMethod();
         onView(withId(R.id.citySuggestEditText))
                 .perform(ViewActions.typeText("Moscow"))

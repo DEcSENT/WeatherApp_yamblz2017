@@ -7,10 +7,6 @@ import com.mishkun.weatherapp.common.Subscriptable;
 import io.reactivex.Completable;
 import io.reactivex.Scheduler;
 
-/**
- * Created by Mishkun on 14.07.2017.
- */
-
 public abstract class CompletableInteractor<P> extends Subscriptable {
     private final Scheduler jobScheduler;
     private final Scheduler uiScheduler;
@@ -30,5 +26,4 @@ public abstract class CompletableInteractor<P> extends Subscriptable {
                                            .subscribeOn(jobScheduler)
                                            .observeOn(uiScheduler);
     }
-
 }

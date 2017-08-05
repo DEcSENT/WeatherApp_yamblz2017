@@ -8,14 +8,14 @@ public class Geometry {
 
     @SerializedName("location")
     @Expose
-    private Location location;
+    private LocationCity locationCity;
 
-    public Location getLocation() {
-        return location;
+    public LocationCity getLocationCity() {
+        return locationCity;
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
+    public void setLocationCity(LocationCity locationCity) {
+        this.locationCity = locationCity;
     }
 
 }

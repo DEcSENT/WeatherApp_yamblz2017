@@ -1,0 +1,178 @@
+<android.support.v4.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/weatherFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/cityTextView"
+            style="@style/Weather_city_name_style"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"/>
+
+        <TextView
+            android:id="@+id/degreesTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="88dp"
+            android:layout_marginStart="8dp"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/extra_large_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iconWeatherImageView"
+            tools:text="23°"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"/>
+
+        <ImageView
+            android:id="@+id/iconWeatherImageView"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:layout_margin="8dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@string/weatherIcon_description_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cityTextView"
+            tools:background="@drawable/drizzle"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"/>
+
+        <TextView
+            android:id="@+id/justHumidityText"
+            style="@style/Weather_small_elements_text_style"
+            android:text="@string/humidity_string"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline1"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintStart_toEndOf="@+id/guideline2"
+            app:layout_constraintHorizontal_bias="0.5"/>
+
+        <ImageView
+            android:id="@+id/humidityImageView"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/ic_humidity"
+            android:contentDescription="@string/humidityIcon_description_text"
+            app:layout_constraintTop_toBottomOf="@+id/justHumidityText"
+            app:layout_constraintEnd_toStartOf="@+id/guideline1"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintStart_toEndOf="@+id/guideline2"
+            app:layout_constraintHorizontal_bias="0.5"/>
+
+        <TextView
+            android:id="@+id/humidityTextView"
+            style="@style/Weather_small_elements_text_style"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/humidityImageView"
+            tools:text="146%"
+            app:layout_constraintEnd_toStartOf="@+id/guideline1"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintStart_toEndOf="@+id/guideline2"
+            app:layout_constraintHorizontal_bias="0.5"/>
+
+        <TextView
+            android:id="@+id/justWindText"
+            style="@style/Weather_small_elements_text_style"
+            android:text="@string/wind_string"
+            tools:layout_editor_absoluteX="427dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/guideline1"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"/>
+
+        <ImageView
+            android:id="@+id/windImageView"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/ic_wind"
+            android:contentDescription="@string/windIcon_description_text"
+            app:layout_constraintTop_toBottomOf="@+id/justWindText"
+            tools:layout_editor_absoluteX="427dp"
+            app:layout_constraintStart_toEndOf="@+id/guideline1"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"/>
+
+        <TextView
+            android:id="@+id/windTextView"
+            style="@style/Weather_small_elements_text_style"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/windImageView"
+            tools:text="1.5 m/s"
+            tools:layout_editor_absoluteX="414dp"
+            app:layout_constraintStart_toEndOf="@+id/guideline1"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"/>
+
+        <TextView
+            android:id="@+id/justPressureText"
+            style="@style/Weather_small_elements_text_style"
+            android:text="@string/pressure_string"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toEndOf="@+id/guideline3"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"/>
+
+        <ImageView
+            android:id="@+id/pressureImageView"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/ic_pressure"
+            android:contentDescription="@string/pressure_string"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/justPressureText"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintStart_toEndOf="@+id/guideline3"
+            app:layout_constraintHorizontal_bias="0.5"/>
+
+        <TextView
+            android:id="@+id/pressureTextView"
+            style="@style/Weather_small_elements_text_style"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pressureImageView"
+            tools:text="756"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintStart_toEndOf="@+id/guideline3"
+            app:layout_constraintHorizontal_bias="0.5"/>
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5"/>
+
+        <android.support.constraint.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/guideline1"
+            app:layout_constraintGuide_percent="0.66"
+            android:orientation="vertical"/>
+
+        <android.support.constraint.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/guideline3"
+            app:layout_constraintGuide_percent="0.82"
+            android:orientation="vertical"/>
+    </android.support.constraint.ConstraintLayout>
+</android.support.v4.widget.SwipeRefreshLayout>

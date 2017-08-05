@@ -29,7 +29,6 @@ public class SettingsFragment extends Fragment implements SettingsView {
 
     public static final String TAG = SettingsFragment.class.getSimpleName();
 
-
     @BindView(R.id.refresh_weather_spinner)
     public AppCompatSpinner spinner;
     private SettingsScreenComponent settingsScreenComponent;
@@ -47,7 +46,6 @@ public class SettingsFragment extends Fragment implements SettingsView {
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
         ButterKnife.bind(this, view);
         return view;
-
     }
 
     @Override

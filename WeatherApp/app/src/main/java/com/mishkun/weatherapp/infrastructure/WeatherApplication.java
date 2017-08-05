@@ -13,10 +13,6 @@ import com.mishkun.weatherapp.domain.interactors.UpdateWeather;
 
 import javax.inject.Inject;
 
-/**
- * Created by Mishkun on 16.07.2017.
- */
-
 public class WeatherApplication extends Application implements HasComponent<AppComponent> {
 
     private AppComponent appComponent;

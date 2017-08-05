@@ -14,10 +14,6 @@ import io.reactivex.annotations.NonNull;
 import static com.mishkun.weatherapp.di.NamedConsts.JOB;
 import static com.mishkun.weatherapp.di.NamedConsts.UI;
 
-/**
- * Created by Mishkun on 14.07.2017.
- */
-
 public class UpdateWeather extends CompletableParameterlessInteractor {
 
     private static final String TAG = UpdateWeather.class.getSimpleName();

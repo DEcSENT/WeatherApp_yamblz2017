@@ -7,10 +7,6 @@ import com.mishkun.weatherapp.common.Subscriptable;
 import io.reactivex.Observable;
 import io.reactivex.Scheduler;
 
-/**
- * Created by Mishkun on 08.07.2017.
- */
-
 public abstract class ParameterlessInteractor<R> extends Subscriptable {
     private final Scheduler jobScheduler;
     private final Scheduler uiScheduler;
