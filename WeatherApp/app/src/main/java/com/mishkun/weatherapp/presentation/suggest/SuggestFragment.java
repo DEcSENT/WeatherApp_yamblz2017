@@ -39,7 +39,7 @@ import io.reactivex.Observable;
 
 public class SuggestFragment extends DialogFragment implements SuggestView{
     public static final String TAG = SuggestFragment.class.getSimpleName();
-    private static final int TIME_DELAY = 1000;
+    private static final int TIME_DELAY = 300;
 
     @BindView(R.id.citySuggestEditText) EditText citySuggestEditText;
     @BindView(R.id.recyclerView) RecyclerView suggestRecyclerView;

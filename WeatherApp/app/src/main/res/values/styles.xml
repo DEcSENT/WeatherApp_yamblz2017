@@ -55,7 +55,30 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">#000000</item>
-        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:background">@drawable/clickbutton_selecter</item>
+    </style>
+
+    <style name="Favourite_card_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/favouriteCardHeight</item>
+        <item name="android:background">@color/colorFavouriteElementsBackground</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:layout_marginEnd">8dp</item>
+    </style>
+
+    <style name="Favourite_elements_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorSettingsText</item>
+    </style>
+
+    <style name="Favoutite_suggest_button_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:background">@drawable/clickbutton_selecter</item>
     </style>
 
 </resources>

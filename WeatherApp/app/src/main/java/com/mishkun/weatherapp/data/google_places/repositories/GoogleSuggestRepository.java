@@ -22,7 +22,6 @@ import static com.mishkun.weatherapp.Constants.API_KEY_GOOGLE;
 public class GoogleSuggestRepository implements SuggestRepository {
 
     private final GooglePlacesApi googlePlacesApi;
-    //private static final String API_KEY_GOOGLE = "AIzaSyCnAOvg2liBhZVM72RQB8k201ehUYv4AMc";
 
     public GoogleSuggestRepository(GooglePlacesApi googlePlacesApi) {
         this.googlePlacesApi = googlePlacesApi;

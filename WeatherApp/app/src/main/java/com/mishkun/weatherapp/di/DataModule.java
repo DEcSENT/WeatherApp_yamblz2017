@@ -1,10 +1,12 @@
 package com.mishkun.weatherapp.di;
 
 import android.content.Context;
+import android.provider.ContactsContract;
 
 import com.mishkun.weatherapp.data.current_weather.OpenWeatherMapApi;
 import com.mishkun.weatherapp.data.current_weather.OpenWeatherMapCurrentWeatherRepository;
 import com.mishkun.weatherapp.data.google_places.GooglePlacesApi;
+import com.mishkun.weatherapp.db.DataBase;
 import com.mishkun.weatherapp.domain.outerworld.CurrentWeatherProvider;
 import com.mishkun.weatherapp.data.google_places.repositories.CityInfoRepository;
 import com.mishkun.weatherapp.data.google_places.repositories.GoogleSuggestRepository;
@@ -59,7 +61,7 @@ class DataModule {
 
     @Provides
     @Singleton
-    CityInfoRepository provideCityInfo(Context context){
-        return new SharedPrefsCityRepository(context);
+    CityInfoRepository provideCityInfo(Context context, DataBase dataBase){
+        return new SharedPrefsCityRepository(context, dataBase);
     }
 }

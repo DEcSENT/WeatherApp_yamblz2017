@@ -22,4 +22,5 @@
     <color name="colorSettingsText">#000000</color>
 
     <color name="colorSuggestElementsBackground">#ffffff</color>
+    <color name="colorFavouriteElementsBackground">#ffffff</color>
 </resources>

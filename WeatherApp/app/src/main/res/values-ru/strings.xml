@@ -37,4 +37,6 @@
     <string name="about_button">О приложении</string>
 
     <string name="cities_hint">Введите название города</string>
+
+    <string name="city_deleted">Город удален</string>
 </resources>

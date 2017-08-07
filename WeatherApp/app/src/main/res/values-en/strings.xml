@@ -37,4 +37,6 @@
     <string name="about_button">About application</string>
 
     <string name="cities_hint">Enter city name</string>
+
+    <string name="city_deleted">City deleted</string>
 </resources>

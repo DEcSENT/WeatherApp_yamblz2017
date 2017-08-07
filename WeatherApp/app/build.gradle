@@ -87,7 +87,14 @@ dependencies {
     // Android job
     compile android_job
 
+    //Android Room
+    compile android_room
+    annotationProcessor android_room_processor
+    compile android_room_rx
+
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-core:2.8.9'
     androidTestCompile 'org.mockito:mockito-android:2.8.9'
+
+    compile 'com.facebook.stetho:stetho:1.4.2'
 }
