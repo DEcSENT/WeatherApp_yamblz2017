@@ -7,7 +7,10 @@ package com.mishkun.weatherapp.db;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.RoomDatabase;
 
-@Database(entities = {CityEntity.class}, version = 1)
+@Database(entities = {CityEntity.class, CacheEntity.class, ForecastEntity.class}, version = 1)
 public abstract class DataBase extends RoomDatabase {
     public abstract CityEntityDAO cityDao();
+    public abstract CacheEntityDAO cacheEntityDAO();
+    public abstract ForecastEntityDAO forecastEntityDAO();
+
 }

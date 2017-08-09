@@ -39,4 +39,10 @@
     <string name="cities_hint">Enter city name</string>
 
     <string name="city_deleted">City deleted</string>
+
+    <string name="error_no_internet">Error. No internet.</string>
+
+    <string name="forecast_text_date">Date</string>
+    <string name="forecast_text_type">Weather type</string>
+    <string name="forecast_text_temp">Temperature</string>
 </resources>

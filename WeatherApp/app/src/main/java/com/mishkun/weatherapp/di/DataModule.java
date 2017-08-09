@@ -5,6 +5,7 @@ import android.provider.ContactsContract;
 
 import com.mishkun.weatherapp.data.current_weather.OpenWeatherMapApi;
 import com.mishkun.weatherapp.data.current_weather.OpenWeatherMapCurrentWeatherRepository;
+import com.mishkun.weatherapp.data.forecast.OpenWeatherForecastRepository;
 import com.mishkun.weatherapp.data.google_places.GooglePlacesApi;
 import com.mishkun.weatherapp.db.DataBase;
 import com.mishkun.weatherapp.domain.outerworld.CurrentWeatherProvider;
@@ -55,13 +56,19 @@ class DataModule {
 
     @Provides
     @Singleton
-    CurrentWeatherProvider provideCurrentWeather(OpenWeatherMapApi openWeatherMapApi, Context context) {
-        return new OpenWeatherMapCurrentWeatherRepository(openWeatherMapApi, context);
+    CurrentWeatherProvider provideCurrentWeather(OpenWeatherMapApi openWeatherMapApi, Context context, DataBase dataBase) {
+        return new OpenWeatherMapCurrentWeatherRepository(openWeatherMapApi, context, dataBase);
     }
 
     @Provides
     @Singleton
     CityInfoRepository provideCityInfo(Context context, DataBase dataBase){
         return new SharedPrefsCityRepository(context, dataBase);
+    }
+
+    @Provides
+    @Singleton
+    OpenWeatherForecastRepository openWeatherForecastRepository(DataBase dataBase, OpenWeatherMapApi openWeatherMapApi){
+        return new OpenWeatherForecastRepository(dataBase, openWeatherMapApi);
     }
 }

@@ -5,6 +5,8 @@ import android.util.Log;
 import com.jakewharton.rxrelay2.BehaviorRelay;
 import com.jakewharton.rxrelay2.PublishRelay;
 import com.mishkun.weatherapp.R;
+import com.mishkun.weatherapp.data.forecast.OpenWeatherForecastRepository;
+import com.mishkun.weatherapp.db.ForecastEntity;
 import com.mishkun.weatherapp.di.WeatherScreen;
 import com.mishkun.weatherapp.domain.entities.Location;
 import com.mishkun.weatherapp.domain.entities.Weather;
@@ -15,12 +17,15 @@ import com.mishkun.weatherapp.presentation.RxPresenter;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
 import javax.inject.Inject;
 
 import io.reactivex.Completable;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Consumer;
 
 @WeatherScreen
 public class WeatherRxPresenter extends RxPresenter<WeatherView> {
@@ -31,10 +36,13 @@ public class WeatherRxPresenter extends RxPresenter<WeatherView> {
     private BehaviorRelay<Weather> weatherStatus;
     private BehaviorRelay<Boolean> loadingStatus;
     private PublishRelay<String> errorMessages;
+    private OpenWeatherForecastRepository openWeatherForecastRepository;
+
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     @Inject
     WeatherRxPresenter(GetWeatherSubscription getWeatherSubscription, UpdateWeather updateWeather,
-                       WeatherMapper weatherMapper) {
+                       WeatherMapper weatherMapper, OpenWeatherForecastRepository openWeatherForecastRepository) {
         this.getWeatherSubscription = getWeatherSubscription;
         this.weatherMapper = weatherMapper;
         weatherStatus = BehaviorRelay.create();
@@ -42,7 +50,7 @@ public class WeatherRxPresenter extends RxPresenter<WeatherView> {
         errorMessages = PublishRelay.create();
         this.updateWeather = updateWeather;
         this.getWeatherSubscription.run().subscribe(weatherStatus);
-
+        this.openWeatherForecastRepository = openWeatherForecastRepository;
         // MAYBE HERE WILL BE SUBSCRIBE TO REPOSITORY WITH LOCATION? OR INTERACTOR?
     }
 
@@ -67,7 +75,7 @@ public class WeatherRxPresenter extends RxPresenter<WeatherView> {
 
     @Override
     protected void onDetach() {
-
+        compositeDisposable.clear();
     }
 
     int getBackground() {
@@ -87,5 +95,16 @@ public class WeatherRxPresenter extends RxPresenter<WeatherView> {
         } else {
             return R.color.colorAccent;
         }
+    }
+
+    public void getForecast(){
+        openWeatherForecastRepository.getFavouriteCityForecast();
+        compositeDisposable.add(openWeatherForecastRepository.getCachedForecast()
+                .subscribe(new Consumer<List<ForecastEntity>>() {
+                    @Override
+                    public void accept(List<ForecastEntity> forecastEntityList) throws Exception {
+                        view.setForecastList(forecastEntityList);
+                    }
+                }));
     }
 }
