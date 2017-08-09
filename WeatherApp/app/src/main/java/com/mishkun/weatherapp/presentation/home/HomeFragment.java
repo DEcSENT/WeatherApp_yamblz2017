@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jakewharton.rxbinding2.support.v4.widget.RxSwipeRefreshLayout;
+import com.mishkun.weatherapp.HomeActivity;
 import com.mishkun.weatherapp.R;
 import com.mishkun.weatherapp.db.ForecastEntity;
 import com.mishkun.weatherapp.di.HasComponent;
@@ -99,6 +100,10 @@ public class HomeFragment extends Fragment implements WeatherView {
         forecastRecyclerView.setAdapter(forecastRecyclerAdapter);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         forecastRecyclerView.setLayoutManager(layoutManager);
+
+        if ((((HomeActivity)getActivity()).getSupportActionBar()) != null) {
+            ((HomeActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        }
     }
 
     @Override
