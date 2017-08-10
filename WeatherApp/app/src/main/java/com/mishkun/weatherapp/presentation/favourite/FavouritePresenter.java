@@ -69,12 +69,12 @@ public class FavouritePresenter {
 
             @Override
             public void onComplete() {
-                view.showMessage("Город удален");
+                view.showMessage(1);
             }
 
             @Override
             public void onError(Throwable e) {
-                view.showMessage("Ошибка удаления");
+                view.showMessage(0);
             }
         });
     }

@@ -30,9 +30,9 @@ public class WeatherList {
     @SerializedName("clouds")
     @Expose
     private int clouds;
-    @SerializedName("rain")
-    @Expose
-    private double rain;
+//    @SerializedName("rain")
+//    @Expose
+//    private double rain;
 
     public int getDt() {
         return dt;
@@ -98,12 +98,12 @@ public class WeatherList {
         this.clouds = clouds;
     }
 
-    public double getRain() {
-        return rain;
-    }
-
-    public void setRain(double rain) {
-        this.rain = rain;
-    }
+//    public double getRain() {
+//        return rain;
+//    }
+//
+//    public void setRain(double rain) {
+//        this.rain = rain;
+//    }
 
 }

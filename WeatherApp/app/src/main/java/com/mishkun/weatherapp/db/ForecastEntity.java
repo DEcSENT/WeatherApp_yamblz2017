@@ -120,4 +120,41 @@ public class ForecastEntity {
     public void setCloud(int cloud) {
         this.cloud = cloud;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ForecastEntity that = (ForecastEntity) o;
+
+        if (id != that.id) return false;
+        if (dt != that.dt) return false;
+        if (Double.compare(that.temp, temp) != 0) return false;
+        if (Double.compare(that.pressure, pressure) != 0) return false;
+        if (humidity != that.humidity) return false;
+        if (weather != that.weather) return false;
+        if (Double.compare(that.speed, speed) != 0) return false;
+        if (deg != that.deg) return false;
+        return cloud == that.cloud;
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp1;
+        result = id;
+        result = 31 * result + dt;
+        temp1 = Double.doubleToLongBits(temp);
+        result = 31 * result + (int) (temp1 ^ (temp1 >>> 32));
+        temp1 = Double.doubleToLongBits(pressure);
+        result = 31 * result + (int) (temp1 ^ (temp1 >>> 32));
+        result = 31 * result + humidity;
+        result = 31 * result + weather;
+        temp1 = Double.doubleToLongBits(speed);
+        result = 31 * result + (int) (temp1 ^ (temp1 >>> 32));
+        result = 31 * result + deg;
+        result = 31 * result + cloud;
+        return result;
+    }
 }

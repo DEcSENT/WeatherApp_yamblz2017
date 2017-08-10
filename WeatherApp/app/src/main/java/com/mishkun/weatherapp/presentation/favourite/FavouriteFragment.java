@@ -127,7 +127,11 @@ public class FavouriteFragment extends Fragment {
         void onclick(CityEntity city);
     }
 
-    public void showMessage(String string){
-        Toast.makeText(getContext(), string, Toast.LENGTH_LONG).show();
+    public void showMessage(int code){
+        if (code == 1) {
+            Toast.makeText(getContext(), getString(R.string.city_deleted), Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(getContext(), getString(R.string.city_deleted), Toast.LENGTH_LONG).show();
+        }
     }
 }

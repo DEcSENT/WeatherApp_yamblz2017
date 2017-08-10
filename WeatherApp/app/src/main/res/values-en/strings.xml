@@ -39,6 +39,7 @@
     <string name="cities_hint">Enter city name</string>
 
     <string name="city_deleted">City deleted</string>
+    <string name="city_deleted_error">Delete error</string>
 
     <string name="error_no_internet">Error. No internet.</string>
 

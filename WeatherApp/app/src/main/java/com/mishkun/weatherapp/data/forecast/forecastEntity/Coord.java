@@ -6,6 +6,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class Coord {
 
+    //DETELE THEIS!
     @SerializedName("lon")
     @Expose
     private double lon;

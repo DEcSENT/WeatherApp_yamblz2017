@@ -22,6 +22,9 @@ android {
             storePassword keystore_properties['storePassword']
         }
     }
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
     buildTypes {
         release {
             minifyEnabled true

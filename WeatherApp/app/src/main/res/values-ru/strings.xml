@@ -39,6 +39,7 @@
     <string name="cities_hint">Введите название города</string>
 
     <string name="city_deleted">Город удален</string>
+    <string name="city_deleted_error">Ошибка удаления</string>
 
     <string name="error_no_internet">Ошибка. Нет интернета.</string>
 

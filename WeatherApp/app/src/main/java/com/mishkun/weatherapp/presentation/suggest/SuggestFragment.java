@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.jakewharton.rxbinding2.widget.RxTextView;
@@ -43,6 +44,7 @@ public class SuggestFragment extends DialogFragment implements SuggestView{
 
     @BindView(R.id.citySuggestEditText) EditText citySuggestEditText;
     @BindView(R.id.recyclerView) RecyclerView suggestRecyclerView;
+    @BindView(R.id.progressBarSuggest) ProgressBar progressBar;
 
     @Inject
     public SuggestPresenter suggestPresenter;
@@ -73,6 +75,7 @@ public class SuggestFragment extends DialogFragment implements SuggestView{
                 Log.v("From recycler click ", prediction.getDescription());
                 Log.v("From recycler city ID", prediction.getPlaceId());
                 suggestPresenter.getCityCoordinatesFromWeb(prediction.getPlaceId());
+                progressBar.setVisibility(View.VISIBLE);
             }
         });
         suggestRecyclerView.setAdapter(suggestRecyclerAdapter);
