@@ -23,12 +23,12 @@ public class ForecastRecyclerAdapter extends RecyclerView.Adapter<ForecastRecycl
 
     private List<ForecastEntity> forecastWeatherList;
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    class MyViewHolder extends RecyclerView.ViewHolder {
         private TextView dateForecastTextView;
         private ImageView iconForecastImageView;
         private TextView tempForecastTextView;
 
-        public MyViewHolder(View view) {
+        MyViewHolder(View view) {
             super(view);
             dateForecastTextView = (TextView) view.findViewById(R.id.dateForecastTextView);
             iconForecastImageView = (ImageView) view.findViewById(R.id.iconForecastImageView);
@@ -36,14 +36,13 @@ public class ForecastRecyclerAdapter extends RecyclerView.Adapter<ForecastRecycl
         }
     }
 
-    public ForecastRecyclerAdapter(List<ForecastEntity> weatherList) {
+    ForecastRecyclerAdapter(List<ForecastEntity> weatherList) {
         this.forecastWeatherList = weatherList;
     }
 
-    public void setNewList(List<ForecastEntity> weatherList) {
+    void setNewList(List<ForecastEntity> weatherList) {
         this.forecastWeatherList = weatherList;
     }
-
 
     @Override
     public ForecastRecyclerAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -71,7 +70,7 @@ public class ForecastRecyclerAdapter extends RecyclerView.Adapter<ForecastRecycl
         return sdf.format(date);
     }
 
-    private static int codeToWeatherIcon(int code) {
+    static int codeToWeatherIcon(int code) {
         if (code >= 200 && code < 300) {
             return R.drawable.thunderstorm;
         } else if (code >= 300 && code < 400) {

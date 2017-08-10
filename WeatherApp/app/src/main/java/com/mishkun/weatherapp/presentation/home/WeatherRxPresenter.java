@@ -6,26 +6,20 @@ import com.jakewharton.rxrelay2.BehaviorRelay;
 import com.jakewharton.rxrelay2.PublishRelay;
 import com.mishkun.weatherapp.R;
 import com.mishkun.weatherapp.data.forecast.OpenWeatherForecastRepository;
-import com.mishkun.weatherapp.db.ForecastEntity;
 import com.mishkun.weatherapp.di.WeatherScreen;
-import com.mishkun.weatherapp.domain.entities.Location;
 import com.mishkun.weatherapp.domain.entities.Weather;
-import com.mishkun.weatherapp.domain.interactors.ApplyCityInfo;
 import com.mishkun.weatherapp.domain.interactors.GetWeatherSubscription;
 import com.mishkun.weatherapp.domain.interactors.UpdateWeather;
 import com.mishkun.weatherapp.presentation.RxPresenter;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
-import java.util.TimeZone;
 
 import javax.inject.Inject;
 
 import io.reactivex.Completable;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Consumer;
 
 @WeatherScreen
 public class WeatherRxPresenter extends RxPresenter<WeatherView> {
@@ -51,7 +45,6 @@ public class WeatherRxPresenter extends RxPresenter<WeatherView> {
         this.updateWeather = updateWeather;
         this.getWeatherSubscription.run().subscribe(weatherStatus);
         this.openWeatherForecastRepository = openWeatherForecastRepository;
-        // MAYBE HERE WILL BE SUBSCRIBE TO REPOSITORY WITH LOCATION? OR INTERACTOR?
     }
 
     @Override
@@ -97,14 +90,9 @@ public class WeatherRxPresenter extends RxPresenter<WeatherView> {
         }
     }
 
-    public void getForecast(){
+    void getForecast(){
         openWeatherForecastRepository.getFavouriteCityForecast();
         compositeDisposable.add(openWeatherForecastRepository.getCachedForecast()
-                .subscribe(new Consumer<List<ForecastEntity>>() {
-                    @Override
-                    public void accept(List<ForecastEntity> forecastEntityList) throws Exception {
-                        view.setForecastList(forecastEntityList);
-                    }
-                }));
+                .subscribe(forecastEntityList -> view.setForecastList(forecastEntityList)));
     }
 }

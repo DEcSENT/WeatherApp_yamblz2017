@@ -20,23 +20,22 @@ public class FavouriteRecyclerAdapter extends RecyclerView.Adapter<FavouriteRecy
     private List<CityEntity> cityEntityList;
     FavouriteFragment.onClickRecyclerItem onClickRecyclerItem;
 
-    public class MyViewHolder extends RecyclerView.ViewHolder{
+    class MyViewHolder extends RecyclerView.ViewHolder{
         private TextView favouriteCityTextView;
-        public MyViewHolder(View view) {
+        MyViewHolder(View view) {
             super(view);
             favouriteCityTextView = (TextView) view.findViewById(R.id.favouriteCityTextView);
         }
     }
 
-    public FavouriteRecyclerAdapter(List<CityEntity> list, FavouriteFragment.onClickRecyclerItem onClickRecyclerItem) {
+    FavouriteRecyclerAdapter(List<CityEntity> list, FavouriteFragment.onClickRecyclerItem onClickRecyclerItem) {
         this.cityEntityList = list;
         this.onClickRecyclerItem = onClickRecyclerItem;
     }
 
-    public void setNewList(List<CityEntity> list) {
+    void setNewList(List<CityEntity> list) {
         this.cityEntityList = list;
     }
-
 
     @Override
     public FavouriteRecyclerAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -54,12 +53,7 @@ public class FavouriteRecyclerAdapter extends RecyclerView.Adapter<FavouriteRecy
         } else {
             holder.favouriteCityTextView.setBackgroundResource(R.drawable.favourite_city_card_default);
         }
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onClickRecyclerItem.onclick(cityEntityList.get(holder.getAdapterPosition()));
-            }
-        });
+        holder.itemView.setOnClickListener(view -> onClickRecyclerItem.onclick(cityEntityList.get(holder.getAdapterPosition())));
     }
 
     @Override
@@ -67,7 +61,7 @@ public class FavouriteRecyclerAdapter extends RecyclerView.Adapter<FavouriteRecy
         return cityEntityList.size();
     }
 
-    public CityEntity getCity(int position){
+    CityEntity getCity(int position){
         return cityEntityList.get(position);
     }
 }

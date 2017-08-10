@@ -3,12 +3,10 @@ package com.mishkun.weatherapp.presentation.suggest;
  * Created by DV on Space 5 
  * 24.07.2017
  */
-import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
@@ -64,7 +62,6 @@ public class SuggestFragment extends DialogFragment implements SuggestView{
         View view = inflater.inflate(R.layout.fragment_suggest,
                 container, false);
         ButterKnife.bind(this, view);
-
         setRxTextChangerListener();
 
         List<Prediction> list = new ArrayList<>();
@@ -72,8 +69,6 @@ public class SuggestFragment extends DialogFragment implements SuggestView{
         suggestRecyclerAdapter = new SuggestRecyclerAdapter(list, new onClickRecyclerItem() {
             @Override
             public void onclick(Prediction prediction) {
-                Log.v("From recycler click ", prediction.getDescription());
-                Log.v("From recycler city ID", prediction.getPlaceId());
                 suggestPresenter.getCityCoordinatesFromWeb(prediction.getPlaceId());
                 progressBar.setVisibility(View.VISIBLE);
             }

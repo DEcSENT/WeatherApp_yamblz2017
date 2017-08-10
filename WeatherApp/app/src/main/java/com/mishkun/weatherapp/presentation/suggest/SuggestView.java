@@ -9,7 +9,6 @@ import com.mishkun.weatherapp.data.google_places.citiesSuggest.Prediction;
 import java.util.List;
 
 interface SuggestView {
-
     void setSuggestAdapter(List<Prediction> list);
     void showError(String string);
     void terminateFragment();

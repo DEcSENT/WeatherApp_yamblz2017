@@ -4,7 +4,6 @@ package com.mishkun.weatherapp.presentation.favourite;
  * 03.08.2017
  */
 
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,19 +12,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.mishkun.weatherapp.R;
-import com.mishkun.weatherapp.data.google_places.citiesSuggest.Prediction;
 import com.mishkun.weatherapp.db.CityEntity;
 import com.mishkun.weatherapp.di.AppComponent;
 import com.mishkun.weatherapp.di.HasComponent;
-import com.mishkun.weatherapp.presentation.suggest.SuggestFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,7 +62,7 @@ public class FavouriteFragment extends Fragment {
 
         List<CityEntity> list = new ArrayList<>();
         CityEntity cityEntity = new CityEntity();
-        cityEntity.setCityName("jopa");
+        cityEntity.setCityName("Default city");
         cityEntity.setFavourite("1");
         list.add(cityEntity);
 
@@ -87,13 +82,9 @@ public class FavouriteFragment extends Fragment {
             }
         };
 
-        favouriteRecyclerAdapter = new FavouriteRecyclerAdapter(list, new onClickRecyclerItem() {
-            @Override
-            public void onclick(CityEntity city) {
-                Log.v("ONCLICK FAV ITEM", city.getCityName());
-                if(!city.getFavourite().equals("1")) {
-                    favouritePresenter.setFavouriteCity(city.getCityName(), city.getLatitude(), city.getFavourite());
-                }
+        favouriteRecyclerAdapter = new FavouriteRecyclerAdapter(list, city -> {
+            if(!city.getFavourite().equals("1")) {
+                favouritePresenter.setFavouriteCity(city.getCityName(), city.getLatitude(), city.getFavourite());
             }
         });
 
@@ -131,7 +122,7 @@ public class FavouriteFragment extends Fragment {
         if (code == 1) {
             Toast.makeText(getContext(), getString(R.string.city_deleted), Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(getContext(), getString(R.string.city_deleted), Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), getString(R.string.city_deleted_error), Toast.LENGTH_LONG).show();
         }
     }
 }

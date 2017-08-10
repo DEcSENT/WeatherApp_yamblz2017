@@ -38,7 +38,6 @@ public class GoogleSuggestRepository implements SuggestRepository {
         return googlePlacesApi.getDetailPlaceInfo(cityID, API_KEY_GOOGLE, Locale.getDefault().toString())
                 .map((coords) -> {
                     LocationCity loc = coords.getResult().getGeometry().getLocationCity();
-                    //Log.v("CITY NAME, WTF?!", coords.getResult().getName());
                     return new City(coords.getResult().getName(), new Location(loc.getLat(), loc.getLng()));
                 });
     }

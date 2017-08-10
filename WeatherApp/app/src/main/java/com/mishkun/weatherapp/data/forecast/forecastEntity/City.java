@@ -12,15 +12,6 @@ public class City {
     @SerializedName("name")
     @Expose
     private String name;
-//    @SerializedName("coord")
-//    @Expose
-//    private Coord coord;
-//    @SerializedName("country")
-//    @Expose
-//    private String country;
-//    @SerializedName("population")
-//    @Expose
-//    private int population;
 
     public int getId() {
         return id;
@@ -37,29 +28,4 @@ public class City {
     public void setName(String name) {
         this.name = name;
     }
-
-//    public Coord getCoord() {
-//        return coord;
-//    }
-//
-//    public void setCoord(Coord coord) {
-//        this.coord = coord;
-//    }
-
-//    public String getCountry() {
-//        return country;
-//    }
-//
-//    public void setCountry(String country) {
-//        this.country = country;
-//    }
-
-//    public int getPopulation() {
-//        return population;
-//    }
-//
-//    public void setPopulation(int population) {
-//        this.population = population;
-//    }
-
 }

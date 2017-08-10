@@ -4,6 +4,8 @@ package com.mishkun.weatherapp.data.forecast.forecastEntity;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class WeatherList {
 
     @SerializedName("dt")
@@ -20,7 +22,7 @@ public class WeatherList {
     private int humidity;
     @SerializedName("weather")
     @Expose
-    private java.util.List<Weather> weather = null;
+    private List<Weather> weather = null;
     @SerializedName("speed")
     @Expose
     private double speed;
@@ -30,9 +32,6 @@ public class WeatherList {
     @SerializedName("clouds")
     @Expose
     private int clouds;
-//    @SerializedName("rain")
-//    @Expose
-//    private double rain;
 
     public int getDt() {
         return dt;
@@ -66,11 +65,11 @@ public class WeatherList {
         this.humidity = humidity;
     }
 
-    public java.util.List<Weather> getWeather() {
+    public List<Weather> getWeather() {
         return weather;
     }
 
-    public void setWeather(java.util.List<Weather> weather) {
+    public void setWeather(List<Weather> weather) {
         this.weather = weather;
     }
 
@@ -97,13 +96,4 @@ public class WeatherList {
     public void setClouds(int clouds) {
         this.clouds = clouds;
     }
-
-//    public double getRain() {
-//        return rain;
-//    }
-//
-//    public void setRain(double rain) {
-//        this.rain = rain;
-//    }
-
 }

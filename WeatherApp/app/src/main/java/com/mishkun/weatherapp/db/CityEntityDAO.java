@@ -5,11 +5,9 @@ package com.mishkun.weatherapp.db;
  */
 
 import android.arch.persistence.room.Dao;
-import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
-import android.arch.persistence.room.Update;
 
 import java.util.List;
 
@@ -21,12 +19,6 @@ public interface CityEntityDAO {
 
     @Query("SELECT * FROM CityEntity")
     Flowable<List<CityEntity>> getAllCities();
-
-//    @Query("SELECT * FROM CityEntity WHERE uid IN (:cityIds)")
-//    List<CityEntity> loadAllByIds(int[] cityIds);
-//
-//    @Query("SELECT * FROM CityEntity WHERE city_name LIKE :name LIMIT 1")
-//    CityEntity findByName(String name);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertCity(CityEntity cityEntity);

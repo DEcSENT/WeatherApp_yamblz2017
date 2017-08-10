@@ -36,45 +36,14 @@ import io.reactivex.schedulers.Schedulers;
 import static com.mishkun.weatherapp.Constants.API_KEY_WEATHER;
 
 public class OpenWeatherMapCurrentWeatherRepository implements CurrentWeatherProvider {
-    private static final String TAG = OpenWeatherMapCurrentWeatherRepository.class.getSimpleName();
     private final OpenWeatherMapApi openWeatherMapApi;
-    // to not to include room or other ORM now, I use this dirty hack
-    //private final BehaviorRelay<Weather> weatherBehaviorSubject;
-    private final Context context;
-    private final String cache = "cache";
-
     private DataBase dataBase;
 
     @Inject
-    public OpenWeatherMapCurrentWeatherRepository(@NonNull OpenWeatherMapApi openWeatherMapApi, @NonNull Context context, DataBase database) {
+    public OpenWeatherMapCurrentWeatherRepository(@NonNull OpenWeatherMapApi openWeatherMapApi, DataBase database) {
         this.openWeatherMapApi = openWeatherMapApi;
-        this.context = context;
         this.dataBase = database;
-        //weatherBehaviorSubject = BehaviorRelay.createDefault(getDefaultWeather());
     }
-
-//    private Weather getDefaultWeather() {
-//        WeatherRaw weatherRaw = null;
-//
-//        SharedPreferences sharedPreferences = context.getSharedPreferences(cache, Context.MODE_PRIVATE);
-//        String jsonFile = sharedPreferences.getString(cache, "");
-//        Gson gson = new Gson();
-//
-////        Single<CacheEntity> single = dataBase.cacheEntityDAO().getCache()
-////                .subscribeOn(Schedulers.io())
-////                .observeOn(AndroidSchedulers.mainThread());
-//
-//        //CacheEntity cacheEntity = single.blockingGet();
-//
-//        //Здесь надо возвращать обсервабле?
-//
-//        weatherRaw = gson.fromJson(jsonFile, WeatherRaw.class);
-//
-//        if (weatherRaw != null) {
-//            return WeatherRawMapper.toDomain(weatherRaw, new Date().getTime());
-//        }
-//        return new Weather(new Temperature(273), 0, 0, WeatherConditions.CLEAR, 0, 1500046530, "MoscoW");
-//    }
 
     @Override
     public Completable refreshData(@NonNull Location location) {

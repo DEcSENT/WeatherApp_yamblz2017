@@ -5,17 +5,13 @@ import android.util.Log;
 
 import com.evernote.android.job.Job;
 import com.evernote.android.job.JobRequest;
-import com.mishkun.weatherapp.domain.entities.Location;
 import com.mishkun.weatherapp.domain.interactors.UpdateWeather;
 
 import java.util.concurrent.TimeUnit;
 
 public class WeatherJob extends Job {
     static final String TAG = "WeatherJob";
-
-    private Location currentLocation = new Location(55.75222, 37.61556);
     private final UpdateWeather updateWeather;
-
 
     WeatherJob(UpdateWeather updateWeather) {
         this.updateWeather = updateWeather;

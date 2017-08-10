@@ -12,5 +12,4 @@ public abstract class DataBase extends RoomDatabase {
     public abstract CityEntityDAO cityDao();
     public abstract CacheEntityDAO cacheEntityDAO();
     public abstract ForecastEntityDAO forecastEntityDAO();
-
 }

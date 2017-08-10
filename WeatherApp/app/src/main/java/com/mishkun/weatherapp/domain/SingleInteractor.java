@@ -2,9 +2,6 @@ package com.mishkun.weatherapp.domain;
 
 import android.support.annotation.NonNull;
 
-import com.mishkun.weatherapp.common.Subscriptable;
-
-import dagger.Subcomponent;
 import io.reactivex.Scheduler;
 import io.reactivex.Single;
 

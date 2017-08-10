@@ -1,17 +1,14 @@
 package com.mishkun.weatherapp.di;
 
-import android.content.Context;
-import android.provider.ContactsContract;
-
 import com.mishkun.weatherapp.data.current_weather.OpenWeatherMapApi;
 import com.mishkun.weatherapp.data.current_weather.OpenWeatherMapCurrentWeatherRepository;
 import com.mishkun.weatherapp.data.forecast.OpenWeatherForecastRepository;
 import com.mishkun.weatherapp.data.google_places.GooglePlacesApi;
+import com.mishkun.weatherapp.data.google_places.repositories.CitiesRepository;
 import com.mishkun.weatherapp.db.DataBase;
 import com.mishkun.weatherapp.domain.outerworld.CurrentWeatherProvider;
 import com.mishkun.weatherapp.data.google_places.repositories.CityInfoRepository;
 import com.mishkun.weatherapp.data.google_places.repositories.GoogleSuggestRepository;
-import com.mishkun.weatherapp.data.google_places.repositories.SharedPrefsCityRepository;
 import com.mishkun.weatherapp.data.google_places.repositories.SuggestRepository;
 
 import javax.inject.Singleton;
@@ -56,14 +53,14 @@ class DataModule {
 
     @Provides
     @Singleton
-    CurrentWeatherProvider provideCurrentWeather(OpenWeatherMapApi openWeatherMapApi, Context context, DataBase dataBase) {
-        return new OpenWeatherMapCurrentWeatherRepository(openWeatherMapApi, context, dataBase);
+    CurrentWeatherProvider provideCurrentWeather(OpenWeatherMapApi openWeatherMapApi, DataBase dataBase) {
+        return new OpenWeatherMapCurrentWeatherRepository(openWeatherMapApi, dataBase);
     }
 
     @Provides
     @Singleton
-    CityInfoRepository provideCityInfo(Context context, DataBase dataBase){
-        return new SharedPrefsCityRepository(context, dataBase);
+    CityInfoRepository provideCityInfo(DataBase dataBase){
+        return new CitiesRepository(dataBase);
     }
 
     @Provides

@@ -35,7 +35,6 @@ public class SettingsRxPresenter extends RxPresenter<SettingsView> {
                                        .subscribe(selectedMinutes);
     }
 
-
     @Override
     protected void onAttach() {
         addSubscription(selectedMinutes.hide()
@@ -51,6 +50,5 @@ public class SettingsRxPresenter extends RxPresenter<SettingsView> {
 
     @Override
     protected void onDetach() {
-
     }
 }

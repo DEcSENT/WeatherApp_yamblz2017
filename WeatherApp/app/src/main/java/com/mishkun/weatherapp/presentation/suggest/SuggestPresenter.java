@@ -16,25 +16,25 @@ public class SuggestPresenter {
     private final GetSuggests getSuggests;
 
     @Inject
-    public SuggestPresenter(ApplyCityInfo applyCityInfo, GetSuggests getSuggests) {
+    SuggestPresenter(ApplyCityInfo applyCityInfo, GetSuggests getSuggests) {
         this.applyCityInfo = applyCityInfo;
         this.getSuggests = getSuggests;
     }
 
-    protected void onAttach(SuggestView view) {
+    void onAttach(SuggestView view) {
         this.view = view;
     }
 
-    protected void onDetach() {
+    void onDetach() {
         this.view = null;
     }
 
-    public void getSuggestFromWeb(String string) {
+    void getSuggestFromWeb(String string) {
         getSuggests.run(string).subscribe((list) -> view.setSuggestAdapter(list),
                 (error) -> view.showError(error.getLocalizedMessage()));
     }
 
-    public void getCityCoordinatesFromWeb(String cityID) {
+    void getCityCoordinatesFromWeb(String cityID) {
         //TODO: Try to fix NPE here<-------------------------------------
         applyCityInfo.run(cityID)
                 .subscribe(() -> view.terminateFragment(),

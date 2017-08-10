@@ -21,25 +21,24 @@ public class SuggestRecyclerAdapter extends RecyclerView.Adapter<SuggestRecycler
     private List<Prediction> predictionList;
     SuggestFragment.onClickRecyclerItem onClickRecyclerItem;
 
-    public class MyViewHolder extends RecyclerView.ViewHolder{
+    class MyViewHolder extends RecyclerView.ViewHolder{
         private TextView cityTextView;
         private TextView countryTextView;
-        public MyViewHolder(View view) {
+        MyViewHolder(View view) {
             super(view);
             cityTextView = (TextView) view.findViewById(R.id.cityTextView);
             countryTextView = (TextView) view.findViewById(R.id.countryTextView);
         }
     }
 
-    public SuggestRecyclerAdapter(List<Prediction> list, SuggestFragment.onClickRecyclerItem onClickRecyclerItem) {
+    SuggestRecyclerAdapter(List<Prediction> list, SuggestFragment.onClickRecyclerItem onClickRecyclerItem) {
         this.predictionList = list;
         this.onClickRecyclerItem = onClickRecyclerItem;
     }
 
-    public void setNewList(List<Prediction> list) {
+    void setNewList(List<Prediction> list) {
         this.predictionList = list;
     }
-
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -60,12 +59,7 @@ public class SuggestRecyclerAdapter extends RecyclerView.Adapter<SuggestRecycler
         String country = predCity.contains(",") ? predCity.substring(predCity.indexOf(",")+2, predCity.length()) : predCity;
         holder.cityTextView.setText(city);
         holder.countryTextView.setText(country);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onClickRecyclerItem.onclick(predictionList.get(holder.getAdapterPosition()));
-            }
-        });
+        holder.itemView.setOnClickListener(view -> onClickRecyclerItem.onclick(predictionList.get(holder.getAdapterPosition())));
     }
 
     @Override

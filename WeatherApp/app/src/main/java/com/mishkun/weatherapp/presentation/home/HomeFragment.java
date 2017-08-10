@@ -4,14 +4,11 @@ package com.mishkun.weatherapp.presentation.home;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +22,6 @@ import com.mishkun.weatherapp.R;
 import com.mishkun.weatherapp.db.ForecastEntity;
 import com.mishkun.weatherapp.di.HasComponent;
 import com.mishkun.weatherapp.di.WeatherScreenComponent;
-import com.mishkun.weatherapp.presentation.suggest.SuggestFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +30,6 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
 
@@ -125,7 +120,6 @@ public class HomeFragment extends Fragment implements WeatherView {
         return RxSwipeRefreshLayout.refreshes(swipeRefreshLayout);
     }
 
-
     @Override
     public Consumer<WeatherViewModel> getWeatherConsumer() {
         return weather -> {
@@ -140,8 +134,7 @@ public class HomeFragment extends Fragment implements WeatherView {
 
     @Override
     public Consumer<String> getErrorConsumer() {
-        return s -> Toast.makeText(getActivity(), s,
-                Toast.LENGTH_LONG).show();
+        return s -> Toast.makeText(getActivity(), s, Toast.LENGTH_LONG).show();
     }
 
     @Override
