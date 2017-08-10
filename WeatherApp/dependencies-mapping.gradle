@@ -9,6 +9,10 @@ def rxrelay_version = '2.0.0'
 def lifecycle_version = '1.0.0-alpha3'
 def rxbinding_version = '2.0.0'
 def android_job_version = '1.1.11'
+def android_room_version = '1.0.0-alpha5'
+def android_room_processor_version = '1.0.0-alpha5'
+def android_room_rx_version = '1.0.0-alpha5'
+
 ext{
     rxjava = "io.reactivex.rxjava2:rxjava:$rxjava_version"
     rxandroid = "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
@@ -34,4 +38,8 @@ ext{
     retrofit_rxadapter = "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
 
     android_job = "com.evernote:android-job:$android_job_version"
+
+    android_room =  "android.arch.persistence.room:runtime:$android_room_version"
+    android_room_processor =  "android.arch.persistence.room:compiler:$android_room_processor_version"
+    android_room_rx = "android.arch.persistence.room:rxjava2:$android_room_rx_version"
 }

@@ -30,7 +30,7 @@ public class GetWeatherSubscription extends ParameterlessInteractor<Weather> {
 
     @Override
     public Observable<Weather> buildUseCaseObservable() {
-        return currentWeatherProvider.getCurrentWeatherSubscription()
+        return currentWeatherProvider.getCurrentWeatherSubscription().toObservable()
                 .flatMap((weather) -> cityInfoRepository.getCityName()
                         .toObservable()
                         .map((name) -> new Weather(weather.getTemperature(),

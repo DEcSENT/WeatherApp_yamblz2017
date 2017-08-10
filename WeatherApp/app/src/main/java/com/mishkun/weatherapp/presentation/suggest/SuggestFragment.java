@@ -3,12 +3,10 @@ package com.mishkun.weatherapp.presentation.suggest;
  * Created by DV on Space 5 
  * 24.07.2017
  */
-import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.jakewharton.rxbinding2.widget.RxTextView;
@@ -39,10 +38,11 @@ import io.reactivex.Observable;
 
 public class SuggestFragment extends DialogFragment implements SuggestView{
     public static final String TAG = SuggestFragment.class.getSimpleName();
-    private static final int TIME_DELAY = 1000;
+    private static final int TIME_DELAY = 300;
 
     @BindView(R.id.citySuggestEditText) EditText citySuggestEditText;
     @BindView(R.id.recyclerView) RecyclerView suggestRecyclerView;
+    @BindView(R.id.progressBarSuggest) ProgressBar progressBar;
 
     @Inject
     public SuggestPresenter suggestPresenter;
@@ -62,7 +62,6 @@ public class SuggestFragment extends DialogFragment implements SuggestView{
         View view = inflater.inflate(R.layout.fragment_suggest,
                 container, false);
         ButterKnife.bind(this, view);
-
         setRxTextChangerListener();
 
         List<Prediction> list = new ArrayList<>();
@@ -70,9 +69,8 @@ public class SuggestFragment extends DialogFragment implements SuggestView{
         suggestRecyclerAdapter = new SuggestRecyclerAdapter(list, new onClickRecyclerItem() {
             @Override
             public void onclick(Prediction prediction) {
-                Log.v("From recycler click ", prediction.getDescription());
-                Log.v("From recycler city ID", prediction.getPlaceId());
                 suggestPresenter.getCityCoordinatesFromWeb(prediction.getPlaceId());
+                progressBar.setVisibility(View.VISIBLE);
             }
         });
         suggestRecyclerView.setAdapter(suggestRecyclerAdapter);

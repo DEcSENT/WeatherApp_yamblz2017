@@ -17,5 +17,4 @@ public class Geometry {
     public void setLocationCity(LocationCity locationCity) {
         this.locationCity = locationCity;
     }
-
 }

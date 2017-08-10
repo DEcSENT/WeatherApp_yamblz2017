@@ -37,4 +37,13 @@
     <string name="about_button">О приложении</string>
 
     <string name="cities_hint">Введите название города</string>
+
+    <string name="city_deleted">Город удален</string>
+    <string name="city_deleted_error">Ошибка удаления</string>
+
+    <string name="error_no_internet">Ошибка. Нет интернета.</string>
+
+    <string name="forecast_text_date">Дата</string>
+    <string name="forecast_text_type">Тип погоды</string>
+    <string name="forecast_text_temp">Температура</string>
 </resources>

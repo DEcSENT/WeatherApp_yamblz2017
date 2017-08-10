@@ -8,9 +8,6 @@ import java.util.List;
 
 public class Result {
 
-    @SerializedName("address_components")
-    @Expose
-    private List<AddressComponent> addressComponents = null;
     @SerializedName("geometry")
     @Expose
     private Geometry geometry;
@@ -23,14 +20,6 @@ public class Result {
     @SerializedName("name")
     @Expose
     private String name;
-
-    public List<AddressComponent> getAddressComponents() {
-        return addressComponents;
-    }
-
-    public void setAddressComponents(List<AddressComponent> addressComponents) {
-        this.addressComponents = addressComponents;
-    }
 
     public Geometry getGeometry() {
         return geometry;
@@ -63,5 +52,4 @@ public class Result {
     public void setName(String name) {
         this.name = name;
     }
-
 }

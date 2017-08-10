@@ -14,7 +14,7 @@ public class SettingsMapper {
     private final int[] refreshRateMapping;
 
     @Inject
-    public SettingsMapper(Context context) {
+    SettingsMapper(Context context) {
         refreshRateMapping = context.getResources().getIntArray(R.array.time_schedule_preference_entry_values);
     }
 

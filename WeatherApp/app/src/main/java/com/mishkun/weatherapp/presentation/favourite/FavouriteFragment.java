@@ -4,20 +4,40 @@ package com.mishkun.weatherapp.presentation.favourite;
  * 03.08.2017
  */
 
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.mishkun.weatherapp.R;
+import com.mishkun.weatherapp.db.CityEntity;
+import com.mishkun.weatherapp.di.AppComponent;
+import com.mishkun.weatherapp.di.HasComponent;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.inject.Inject;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class FavouriteFragment extends Fragment {
+
+    @Inject
+    public FavouritePresenter favouritePresenter;
+
+    private FavouriteRecyclerAdapter favouriteRecyclerAdapter;
+
+    @BindView(R.id.favouriteRecyclerView) RecyclerView favouriteRecyclerView;
 
     public FavouriteFragment() {
         // Required empty public constructor
@@ -32,20 +52,77 @@ public class FavouriteFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        ButterKnife.bind(this, view);
         ActionBar supportActionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         if (supportActionBar != null) {
             supportActionBar.setTitle(R.string.favourite_title);
             supportActionBar.setDisplayHomeAsUpEnabled(true);
         }
+        ((HasComponent<AppComponent>) getActivity().getApplication()).getComponent().inject(this);
+
+        List<CityEntity> list = new ArrayList<>();
+        CityEntity cityEntity = new CityEntity();
+        cityEntity.setCityName("Default city");
+        cityEntity.setFavourite("1");
+        list.add(cityEntity);
+
+        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
+
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
+                int position = viewHolder.getAdapterPosition();
+                if (!favouriteRecyclerAdapter.getCity(position).getFavourite().equals("1")){
+                    favouritePresenter.deleteCity(favouriteRecyclerAdapter.getCity(position).getUid());
+                }
+                favouriteRecyclerAdapter.notifyItemChanged(position);
+            }
+        };
+
+        favouriteRecyclerAdapter = new FavouriteRecyclerAdapter(list, city -> {
+            if(!city.getFavourite().equals("1")) {
+                favouritePresenter.setFavouriteCity(city.getCityName(), city.getLatitude(), city.getFavourite());
+            }
+        });
+
+        favouriteRecyclerView.setAdapter(favouriteRecyclerAdapter);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+        favouriteRecyclerView.setLayoutManager(layoutManager);
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
+        itemTouchHelper.attachToRecyclerView(favouriteRecyclerView);
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        favouritePresenter.onAttach(this);
+        favouritePresenter.getCitiesList();
     }
 
     @Override
     public void onPause() {
         super.onPause();
+        favouritePresenter.onDetach();
+    }
+
+    public void setFavouriteCities(List<CityEntity> cities){
+        favouriteRecyclerAdapter.setNewList(cities);
+        favouriteRecyclerView.setAdapter(favouriteRecyclerAdapter);
+    }
+
+    public interface onClickRecyclerItem {
+        void onclick(CityEntity city);
+    }
+
+    public void showMessage(int code){
+        if (code == 1) {
+            Toast.makeText(getContext(), getString(R.string.city_deleted), Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(getContext(), getString(R.string.city_deleted_error), Toast.LENGTH_LONG).show();
+        }
     }
 }

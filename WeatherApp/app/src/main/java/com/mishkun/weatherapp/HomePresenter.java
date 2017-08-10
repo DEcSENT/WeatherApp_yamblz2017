@@ -66,7 +66,7 @@ public class HomePresenter implements HomePres {
         String backStateName = fragment.getClass().getName();
         boolean fragmentPopped = fragmentManager.popBackStackImmediate(backStateName, 0);
 
-        if (!fragmentPopped && fragmentManager.findFragmentByTag(backStateName) == null) { //fragment not in back stack, create it.
+        if (!fragmentPopped && fragmentManager.findFragmentByTag(backStateName) == null) {
             FragmentTransaction ft = fragmentManager.beginTransaction();
             ft.replace(R.id.fragmentContainer, fragment, backStateName);
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);

@@ -2,7 +2,6 @@ package com.mishkun.weatherapp.domain.interactors;
 
 import android.support.annotation.NonNull;
 
-import com.mishkun.weatherapp.domain.SingleInteractor;
 import com.mishkun.weatherapp.domain.SingleParameterlessInteractor;
 import com.mishkun.weatherapp.domain.outerworld.UpdatePreferenceProvider;
 

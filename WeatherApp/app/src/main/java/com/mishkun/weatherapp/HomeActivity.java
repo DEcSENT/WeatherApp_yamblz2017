@@ -59,6 +59,13 @@ public class HomeActivity extends AppCompatActivity
             super.onBackPressed();
         }
     }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return super.onSupportNavigateUp();
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_home_menu, menu);
@@ -118,12 +125,12 @@ public class HomeActivity extends AppCompatActivity
         }
     }
 
-    /*Click on About button in settings fragment.*/
+    /*Click About button in settings fragment.*/
     public void onClickAbout(View view) {
         homePresenter.openAboutFragment();
     }
 
-    /*Click on Add button in Favourite fragment. */
+    /*Click Add button in Favourite fragment. */
     public void onClickAddNewCity(View view) {
         homePresenter.openSuggestFragment();
     }

@@ -22,7 +22,6 @@ import static com.mishkun.weatherapp.Constants.API_KEY_GOOGLE;
 public class GoogleSuggestRepository implements SuggestRepository {
 
     private final GooglePlacesApi googlePlacesApi;
-    //private static final String API_KEY_GOOGLE = "AIzaSyCnAOvg2liBhZVM72RQB8k201ehUYv4AMc";
 
     public GoogleSuggestRepository(GooglePlacesApi googlePlacesApi) {
         this.googlePlacesApi = googlePlacesApi;
@@ -39,7 +38,6 @@ public class GoogleSuggestRepository implements SuggestRepository {
         return googlePlacesApi.getDetailPlaceInfo(cityID, API_KEY_GOOGLE, Locale.getDefault().toString())
                 .map((coords) -> {
                     LocationCity loc = coords.getResult().getGeometry().getLocationCity();
-                    //Log.v("CITY NAME, WTF?!", coords.getResult().getName());
                     return new City(coords.getResult().getName(), new Location(loc.getLat(), loc.getLng()));
                 });
     }

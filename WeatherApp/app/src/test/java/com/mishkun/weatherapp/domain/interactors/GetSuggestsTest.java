@@ -1,4 +1,4 @@
-package com.mishkun.weatherapp.presentation.suggest.interactors;
+package com.mishkun.weatherapp.domain.interactors;
 
 
 import com.mishkun.weatherapp.domain.interactors.GetSuggests;

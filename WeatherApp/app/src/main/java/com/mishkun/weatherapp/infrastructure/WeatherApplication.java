@@ -2,14 +2,13 @@ package com.mishkun.weatherapp.infrastructure;
 
 import android.app.Application;
 
-import com.evernote.android.job.JobManager;
+import com.facebook.stetho.Stetho;
 import com.mishkun.weatherapp.di.AppComponent;
 import com.mishkun.weatherapp.di.AppModule;
 import com.mishkun.weatherapp.di.DaggerAppComponent;
 import com.mishkun.weatherapp.di.HasComponent;
 import com.mishkun.weatherapp.domain.interactors.GetWeatherUpdatesFrequency;
 import com.mishkun.weatherapp.domain.interactors.ScheduleWeatherUpdate;
-import com.mishkun.weatherapp.domain.interactors.UpdateWeather;
 
 import javax.inject.Inject;
 
@@ -33,6 +32,26 @@ public class WeatherApplication extends Application implements HasComponent<AppC
                                               .build();
         appComponent.inject(this);
         rescheduleWeatherJob();
+
+        // Create an InitializerBuilder
+        Stetho.InitializerBuilder initializerBuilder =
+                Stetho.newInitializerBuilder(this);
+
+        // Enable Chrome DevTools
+        initializerBuilder.enableWebKitInspector(
+                Stetho.defaultInspectorModulesProvider(this)
+        );
+
+        // Enable command line interface
+        initializerBuilder.enableDumpapp(
+                Stetho.defaultDumperPluginsProvider(this)
+        );
+
+        // Use the InitializerBuilder to generate an Initializer
+        Stetho.Initializer initializer = initializerBuilder.build();
+
+        // Initialize Stetho with the Initializer
+        Stetho.initialize(initializer);
     }
 
     private void rescheduleWeatherJob() {
