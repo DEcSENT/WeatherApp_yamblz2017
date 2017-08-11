@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply from: rootProject.file('dependencies-mapping.gradle')
 apply from: rootProject.file('keystore-functions.gradle')
-
+apply plugin: 'jacoco-android'
 
 android {
     compileSdkVersion rootProject.target_sdk
@@ -34,6 +34,9 @@ android {
         debug {
             useProguard false
             debuggable true
+        }
+        debug {
+            testCoverageEnabled = true
         }
     }
     compileOptions {

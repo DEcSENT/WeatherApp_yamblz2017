@@ -57,6 +57,7 @@
 
         <Button
             style="@style/Settings_about_button_style"
+            android:id="@+id/aboutButton"
             android:text="@string/about_button"
             android:onClick="onClickAbout"
             app:layout_constraintBottom_toBottomOf="parent"

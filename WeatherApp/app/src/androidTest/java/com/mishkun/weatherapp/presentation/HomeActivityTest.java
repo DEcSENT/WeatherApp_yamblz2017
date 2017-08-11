@@ -1,9 +1,5 @@
 package com.mishkun.weatherapp.presentation;
 
-import android.support.test.espresso.action.ViewActions;
-import android.support.test.espresso.contrib.DrawerActions;
-import android.support.test.espresso.contrib.NavigationViewActions;
-import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -16,6 +12,7 @@ import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.pressBack;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -34,43 +31,70 @@ public class HomeActivityTest{
             HomeActivity.class);
 
     @Test
-    public void clickCityName(){
-        onView(withId(R.id.weatherFragment)).check(matches(is(isDisplayed())));
-        // This may produce NPE
-        onView(ViewMatchers.withId(R.id.cityTextView)).perform(click());
-    }
-
-    @Test
-    public void openAndCloseNavigationDrawer(){
-        onView(withId(R.id.drawer_layout)).perform(ViewActions.swipeRight());
-        freezeTimeMethod();
-        onView(withId(R.id.drawer_layout)).perform(DrawerActions.close());
-    }
-
-    @Test
-    public void openWeatherFragment(){
-        freezeTimeMethod();
-        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
-        onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_home));
+    public void clickWeatherFragment(){
+        onView(withId(R.id.weatherIcon)).perform(click());
         onView(withId(R.id.weatherFragment)).check(matches(is(isDisplayed())));
         freezeTimeMethod();
     }
 
     @Test
-    public void openSettingsFragment(){
+    public void clickCityFragment(){
+        onView(withId(R.id.favouriteIcon)).perform(click());
+        onView(withId(R.id.favouriteFragment)).check(matches(is(isDisplayed())));
         freezeTimeMethod();
-        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
-        onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_settings));
+    }
+
+    @Test
+    public void clickSettingsFragment(){
+        onView(withId(R.id.settingsIcon)).perform(click());
         onView(withId(R.id.settingsFragment)).check(matches(is(isDisplayed())));
         freezeTimeMethod();
     }
 
     @Test
-    public void openAboutFragments(){
-        freezeTimeMethod();
-        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
-        onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_about));
-        onView(withId(R.id.aboutFragment)).check(matches(is(isDisplayed())));
-        freezeTimeMethod();
+    public void check_Navigation(){
+        onView(withId(R.id.weatherIcon)).perform(click());
+        onView(withId(R.id.favouriteIcon)).perform(click());
+        onView(withId(R.id.settingsIcon)).perform(click());
+
+        onView(withId(R.id.settingsIcon)).perform(pressBack());
+        onView(withId(R.id.favouriteFragment)).check(matches(is(isDisplayed())));
+        onView(withId(R.id.favouriteFragment)).perform(pressBack());
+        onView(withId(R.id.weatherFragment)).check(matches(is(isDisplayed())));
     }
+
+
+//    @Test
+//    public void openAndCloseNavigationDrawer(){
+//        onView(withId(R.id.drawer_layout)).perform(ViewActions.swipeRight());
+//        freezeTimeMethod();
+//        onView(withId(R.id.drawer_layout)).perform(DrawerActions.close());
+//    }
+//
+//    @Test
+//    public void openWeatherFragment(){
+//        freezeTimeMethod();
+//        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
+//        onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_home));
+//        onView(withId(R.id.weatherFragment)).check(matches(is(isDisplayed())));
+//        freezeTimeMethod();
+//    }
+//
+//    @Test
+//    public void openSettingsFragment(){
+//        freezeTimeMethod();
+//        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
+//        onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_settings));
+//        onView(withId(R.id.settingsFragment)).check(matches(is(isDisplayed())));
+//        freezeTimeMethod();
+//    }
+//
+//    @Test
+//    public void openAboutFragments(){
+//        freezeTimeMethod();
+//        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
+//        onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_about));
+//        onView(withId(R.id.aboutFragment)).check(matches(is(isDisplayed())));
+//        freezeTimeMethod();
+//    }
 }
