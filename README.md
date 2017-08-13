@@ -16,3 +16,7 @@ For cities information was used **Google Places API.**
 
 <img src="https://image.ibb.co/cZaDNF/photo_2017_08_13_22_13_59.jpg" width="270" height="480"><img src="https://image.ibb.co/dY669v/photo_2017_08_13_22_13_54.jpg" width="270" height="480">
 <img src="https://image.ibb.co/cfz4wa/photo_2017_08_13_22_13_22.jpg" width="800" height="480">
+
+### Icons:
+
+Icons made by RNS from www.flaticon.com is licensed by CC 3.0 BY
