@@ -36,7 +36,6 @@ public class FavouritePresenterTest {
     @Mock
     private FavouriteFragment view;
 
-
     @Before
     public void setUp() throws Exception {
         favouritePresenter = new FavouritePresenter(applyCityInfo, getSuggests);

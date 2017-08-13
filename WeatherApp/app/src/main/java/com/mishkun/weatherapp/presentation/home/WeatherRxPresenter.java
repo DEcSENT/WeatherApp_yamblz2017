@@ -91,6 +91,7 @@ public class WeatherRxPresenter extends RxPresenter<WeatherView> {
     }
 
     void getForecast(){
+        //TODO: Maybe fix this call?
         openWeatherForecastRepository.getFavouriteCityForecast();
         compositeDisposable.add(openWeatherForecastRepository.getCachedForecast()
                 .subscribe(forecastEntityList -> view.setForecastList(forecastEntityList)));

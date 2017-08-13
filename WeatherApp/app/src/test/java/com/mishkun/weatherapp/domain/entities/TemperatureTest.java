@@ -44,4 +44,11 @@ public class TemperatureTest {
         assertNotEquals(testValue - 275, temperature.getCelsiusDegrees(), delta);
     }
 
+    @Test
+    public void testEquals_Symmetric() {
+        Temperature x = new Temperature(10);
+        Temperature y = new Temperature(10);
+        assertTrue(x.equals(y) && y.equals(x));
+        assertTrue(x.hashCode() == y.hashCode());
+    }
 }

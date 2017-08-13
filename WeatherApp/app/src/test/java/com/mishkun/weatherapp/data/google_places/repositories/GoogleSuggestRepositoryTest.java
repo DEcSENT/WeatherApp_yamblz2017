@@ -1,5 +1,7 @@
 package com.mishkun.weatherapp.data.google_places.repositories;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.mishkun.weatherapp.data.google_places.GooglePlacesApi;
 import com.mishkun.weatherapp.data.google_places.detailCityInfo.LocationCity;
@@ -20,6 +22,7 @@ import io.reactivex.Single;
 import io.reactivex.observers.TestObserver;
 
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /*
@@ -28,6 +31,7 @@ import static org.mockito.Mockito.when;
  */
 @RunWith(MockitoJUnitRunner.class)
 public class GoogleSuggestRepositoryTest {
+    private GoogleSuggestRepository googleSuggestRepository;
     private CitiesSuggest citiesSuggest;
     private DetailCityInfo detailCityInfo;
     @Mock
@@ -42,6 +46,8 @@ public class GoogleSuggestRepositoryTest {
         Gson jsonObject2 = new Gson();
         citiesSuggest = jsonObject1.fromJson(citiesSuggestJSON, CitiesSuggest.class);
         detailCityInfo = jsonObject2.fromJson(cityCoordinateJSON, DetailCityInfo.class);
+
+        googleSuggestRepository = new GoogleSuggestRepository(googlePlacesApi);
     }
 
     @Test
@@ -73,5 +79,22 @@ public class GoogleSuggestRepositoryTest {
 
         cityCoordinatesTestObserver.awaitTerminalEvent();
         cityCoordinatesTestObserver.assertNoErrors().assertValue(testCity);
+    }
+
+//    @Test
+//    public void getCitiesSuggest() throws Exception {
+//        when(googlePlacesApi.getSuggest("paris", "(cities)", "test"))
+//                .thenReturn(Single.just(citiesSuggest));
+//        googleSuggestRepository.getCitiesSuggest("paris");
+//        verify(googlePlacesApi).getSuggest("paris", "(cities)", "test");
+//    }
+
+    @Test
+    public void getCityCoordinates() throws Exception {
+        when(googlePlacesApi.getDetailPlaceInfo(anyString(), anyString(), anyString()))
+                .thenReturn(Single.just(detailCityInfo));
+
+        googleSuggestRepository.getCityCoordinates("test_id");
+        verify(googlePlacesApi).getDetailPlaceInfo("test_id", "AIzaSyCnAOvg2liBhZVM72RQB8k201ehUYv4AMc", "ru_RU");
     }
 }

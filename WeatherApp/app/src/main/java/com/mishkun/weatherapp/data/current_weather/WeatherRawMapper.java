@@ -17,7 +17,7 @@ class WeatherRawMapper {
         return pressureHPa * 0.750061561303;
     }
 
-    private static WeatherConditions codeToCondition(int code) {
+    static WeatherConditions codeToCondition(int code) {
         if (code >= 200 && code < 300) {
             return WeatherConditions.THUNDERSTORM;
         } else if (code >= 300 && code < 400) {
