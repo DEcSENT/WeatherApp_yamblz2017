@@ -63,38 +63,4 @@ public class HomeActivityTest{
         onView(withId(R.id.weatherFragment)).check(matches(is(isDisplayed())));
     }
 
-
-//    @Test
-//    public void openAndCloseNavigationDrawer(){
-//        onView(withId(R.id.drawer_layout)).perform(ViewActions.swipeRight());
-//        freezeTimeMethod();
-//        onView(withId(R.id.drawer_layout)).perform(DrawerActions.close());
-//    }
-//
-//    @Test
-//    public void openWeatherFragment(){
-//        freezeTimeMethod();
-//        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
-//        onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_home));
-//        onView(withId(R.id.weatherFragment)).check(matches(is(isDisplayed())));
-//        freezeTimeMethod();
-//    }
-//
-//    @Test
-//    public void openSettingsFragment(){
-//        freezeTimeMethod();
-//        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
-//        onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_settings));
-//        onView(withId(R.id.settingsFragment)).check(matches(is(isDisplayed())));
-//        freezeTimeMethod();
-//    }
-//
-//    @Test
-//    public void openAboutFragments(){
-//        freezeTimeMethod();
-//        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
-//        onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_about));
-//        onView(withId(R.id.aboutFragment)).check(matches(is(isDisplayed())));
-//        freezeTimeMethod();
-//    }
 }

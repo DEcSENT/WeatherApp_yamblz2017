@@ -37,15 +37,6 @@ public class FavouriteFragmentTest {
     }
 
     @Test
-    public void checkSuggestFragment(){
-        onView(withId(R.id.favouriteIcon)).perform(click());
-        onView(withId(R.id.favouriteFragment)).check(matches(is(isDisplayed())));
-        freezeTimeMethod();
-        onView(withId(R.id.suggestButton)).perform(click());
-        onView(withId(R.id.suggestFragment)).check(matches(is(isDisplayed())));
-    }
-
-    @Test
     public void checkFirstDefaultItem_InSuggestFragment(){
         onView(withId(R.id.favouriteIcon)).perform(click());
         onView(withId(R.id.favouriteFragment)).check(matches(is(isDisplayed())));
