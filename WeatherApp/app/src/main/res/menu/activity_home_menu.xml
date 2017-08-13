@@ -7,7 +7,7 @@
         android:title="@string/weather_title"/>
 
     <item
-        android:id="@+id/falouriteIcon"
+        android:id="@+id/favouriteIcon"
         app:showAsAction="always"
         android:icon="@drawable/ic_cityscape"
         android:title="@string/favourite_title"/>

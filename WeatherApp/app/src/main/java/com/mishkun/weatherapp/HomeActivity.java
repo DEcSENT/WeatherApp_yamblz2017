@@ -82,7 +82,7 @@ public class HomeActivity extends AppCompatActivity
             case R.id.settingsIcon:
                 homePresenter.openSettingsFragment();
                 return true;
-            case R.id.falouriteIcon:
+            case R.id.favouriteIcon:
                 homePresenter.openSelectCityFragment();
                 return true;
             default:

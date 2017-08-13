@@ -19,5 +19,4 @@ public class CitiesSuggest {
     public void setPredictions(List<Prediction> predictions) {
         this.predictions = predictions;
     }
-
 }

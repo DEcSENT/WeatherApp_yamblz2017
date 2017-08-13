@@ -17,5 +17,4 @@ public class DetailCityInfo {
     public void setResult(Result result) {
         this.result = result;
     }
-
 }

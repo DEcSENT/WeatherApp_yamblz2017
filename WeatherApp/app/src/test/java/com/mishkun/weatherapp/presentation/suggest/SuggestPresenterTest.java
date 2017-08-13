@@ -17,6 +17,7 @@ import java.util.List;
 import io.reactivex.Completable;
 import io.reactivex.Single;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -45,6 +46,9 @@ public class SuggestPresenterTest {
         arrayList.add(pred);
         when(getSuggests.run(anyString())).thenReturn(Single.just(arrayList));
         when(applyCityInfo.run(anyString())).thenReturn(Completable.complete());
+
+        when(getSuggests.run("some bad string")).thenReturn(Single.error(new Throwable()));
+        when(applyCityInfo.run("some bad id")).thenReturn(Completable.error(new Throwable()));
     }
 
     @Test
@@ -60,4 +64,15 @@ public class SuggestPresenterTest {
         verify(view).terminateFragment();
     }
 
+    @Test
+    public void SomethingGoingWrong_getSuggestFromWeb() throws Exception {
+        suggestPresenter.getSuggestFromWeb("some bad string");
+        verify(view).showError(null);
+    }
+
+    @Test
+    public void SomethingGoingWrong_getCityCoordinatesFromWeb() throws Exception {
+        suggestPresenter.getCityCoordinatesFromWeb("some bad id");
+        verify(view).showError("Error adding");
+    }
 }

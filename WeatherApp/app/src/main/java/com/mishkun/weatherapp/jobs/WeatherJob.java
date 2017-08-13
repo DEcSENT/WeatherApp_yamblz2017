@@ -30,7 +30,6 @@ public class WeatherJob extends Job {
     @NonNull
     @Override
     protected Result onRunJob(Params params) {
-        Log.i("WEATHER GIMME WEATHER", "============================================");
         updateWeather.run().onErrorComplete().subscribe();
         return Result.SUCCESS;
     }

@@ -1,7 +1,5 @@
 package com.mishkun.weatherapp.presentation;
 
-import android.support.test.espresso.contrib.DrawerActions;
-import android.support.test.espresso.contrib.NavigationViewActions;
 import android.support.test.rule.ActivityTestRule;
 
 import com.mishkun.weatherapp.HomeActivity;
@@ -14,6 +12,7 @@ import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withSpinnerText;
 import static com.mishkun.weatherapp.PauseTimeUtil.freezeTimeMethod;
@@ -33,13 +32,34 @@ public class SettingsFragmentTest {
 
     @Test
     public void openSettingsAndCheckSpinnerItem(){
-        freezeTimeMethod();
-        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
-        onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_settings));
-        freezeTimeMethod();
+        onView(withId(R.id.settingsIcon)).perform(click());
+
         onView(withId(R.id.refresh_weather_spinner)).perform(click());
         onData(allOf(is(instanceOf(String.class)), is("30 минут"))).perform(click());
         onView(withId(R.id.refresh_weather_spinner)).check(matches(withSpinnerText(containsString("30 минут"))));
+        freezeTimeMethod();
+    }
+
+    @Test
+    public void openAndClose_SettingsAndCheckSpinnerItem(){
+        onView(withId(R.id.settingsIcon)).perform(click());
+
+        onView(withId(R.id.refresh_weather_spinner)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("30 минут"))).perform(click());
+        onView(withId(R.id.refresh_weather_spinner)).check(matches(withSpinnerText(containsString("30 минут"))));
+        freezeTimeMethod();
+
+        onView(withId(R.id.favouriteIcon)).perform(click());
+        onView(withId(R.id.settingsIcon)).perform(click());
+        onView(withId(R.id.refresh_weather_spinner)).check(matches(withSpinnerText(containsString("30 минут"))));
+    }
+
+    @Test
+    public void openSettingsAndAboutItem(){
+        onView(withId(R.id.settingsIcon)).perform(click());
+        onView(withId(R.id.aboutButton)).perform(click());
+        onView(withId(R.id.aboutFragment)).check(matches(is(isDisplayed())));
+
         freezeTimeMethod();
     }
 }

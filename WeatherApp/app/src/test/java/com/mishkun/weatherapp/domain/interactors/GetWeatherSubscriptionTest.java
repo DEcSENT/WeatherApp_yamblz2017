@@ -12,6 +12,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import io.reactivex.schedulers.TestScheduler;
 
@@ -40,7 +41,7 @@ public class GetWeatherSubscriptionTest {
                 WeatherConditions.RAIN,
                 10.0,
                10L, "Test");
-        when(currentWeatherProvider.getCurrentWeatherSubscription()).thenReturn(Observable.just(weather));
+        when(currentWeatherProvider.getCurrentWeatherSubscription()).thenReturn(Flowable.just(weather));
     }
 
     @Test

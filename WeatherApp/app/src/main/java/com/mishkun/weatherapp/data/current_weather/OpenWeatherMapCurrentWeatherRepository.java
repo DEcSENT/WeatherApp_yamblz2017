@@ -26,6 +26,7 @@ import javax.inject.Inject;
 import io.reactivex.Completable;
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
+import io.reactivex.Scheduler;
 import io.reactivex.Single;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -38,11 +39,13 @@ import static com.mishkun.weatherapp.Constants.API_KEY_WEATHER;
 public class OpenWeatherMapCurrentWeatherRepository implements CurrentWeatherProvider {
     private final OpenWeatherMapApi openWeatherMapApi;
     private DataBase dataBase;
+    private Scheduler schedulerIO;
 
     @Inject
-    public OpenWeatherMapCurrentWeatherRepository(@NonNull OpenWeatherMapApi openWeatherMapApi, DataBase database) {
+    public OpenWeatherMapCurrentWeatherRepository(@NonNull OpenWeatherMapApi openWeatherMapApi, DataBase database, Scheduler scheduler) {
         this.openWeatherMapApi = openWeatherMapApi;
         this.dataBase = database;
+        schedulerIO = scheduler;
     }
 
     @Override
@@ -53,7 +56,7 @@ public class OpenWeatherMapCurrentWeatherRepository implements CurrentWeatherPro
     }
 
     @SuppressLint("CommitPrefEdits")
-    private void cacheIt(WeatherRaw weatherRaw) {
+    public void cacheIt(WeatherRaw weatherRaw) {
         Gson gson = new Gson();
         String weatherjson = gson.toJson(weatherRaw, WeatherRaw.class);
         CacheEntity cacheEntity = new CacheEntity();
@@ -64,7 +67,7 @@ public class OpenWeatherMapCurrentWeatherRepository implements CurrentWeatherPro
     @Override
     public Flowable<Weather> getCurrentWeatherSubscription() {
         return dataBase.cacheEntityDAO().getCache()
-                .subscribeOn(Schedulers.io())
+                .subscribeOn(schedulerIO)
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(cacheEntity -> {
                     String stringCache = cacheEntity.getCachedWeather();

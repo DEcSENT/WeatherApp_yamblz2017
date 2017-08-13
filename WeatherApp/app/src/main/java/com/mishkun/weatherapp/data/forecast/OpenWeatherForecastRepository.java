@@ -22,6 +22,7 @@ import java.util.List;
 
 import io.reactivex.Completable;
 import io.reactivex.Flowable;
+import io.reactivex.Scheduler;
 import io.reactivex.Single;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -32,20 +33,23 @@ import static com.mishkun.weatherapp.Constants.API_KEY_WEATHER;
 
 public class OpenWeatherForecastRepository {
 
+    /* Days count for forecast. */
     private final int DAYS_COUNT = 7;
 
     private DataBase dataBase;
     private OpenWeatherMapApi openWeatherMapApi;
+    private Scheduler schedulerIO;
 
     @Inject
-    public OpenWeatherForecastRepository(@NonNull DataBase dataBase, @NonNull OpenWeatherMapApi openWeatherMapApi) {
+    public OpenWeatherForecastRepository(@NonNull DataBase dataBase, @NonNull OpenWeatherMapApi openWeatherMapApi, Scheduler scheduler) {
         this.dataBase = dataBase;
         this.openWeatherMapApi = openWeatherMapApi;
+        schedulerIO = scheduler;
     }
 
     public void getFavouriteCityForecast(){
         Single<CityEntity> cityEntitySingle = dataBase.cityDao().getFavourite()
-                .subscribeOn(Schedulers.io())
+                .subscribeOn(schedulerIO)
                 .observeOn(AndroidSchedulers.mainThread());
 
         cityEntitySingle.subscribe(new SingleObserver<CityEntity>() {
@@ -56,14 +60,13 @@ public class OpenWeatherForecastRepository {
 
             @Override
             public void onSuccess(CityEntity cityEntity) {
-                //Looks like here may be NPE, couz first app start?
                 Location location = new Location(Double.parseDouble(cityEntity.getLatitude()), Double.parseDouble(cityEntity.getLongitude()));
                 getForecast(location);
             }
 
             @Override
             public void onError(Throwable e) {
-                Log.e("EERRRRORRRRRRRRR!", "onError: BAD FAVOURITE?! ," +  e);
+                Log.e("Error!", "No favourite here! And: " +  e);
             }
         });
     }
@@ -71,7 +74,7 @@ public class OpenWeatherForecastRepository {
     public void getForecast(Location location){
         Single<ForecastWeather> forecastWeatherSingle = openWeatherMapApi
                 .getForecastWeather(location.getLatitude(), location.getLongitude(), API_KEY_WEATHER, DAYS_COUNT)
-                .subscribeOn(Schedulers.io())
+                .subscribeOn(schedulerIO)
                 .observeOn(AndroidSchedulers.mainThread());
 
         forecastWeatherSingle.subscribe(new SingleObserver<ForecastWeather>() {
@@ -91,29 +94,29 @@ public class OpenWeatherForecastRepository {
 
             @Override
             public void onError(Throwable e) {
-                Log.e("ERROR!", "onError: =====NO INTERNET=====", e);
+                Log.e("Error!", "No internet?", e);
             }
         });
     }
 
-    private void deleteAndCache(List<ForecastEntity> forecastEntityList){
+    public void deleteAndCache(List<ForecastEntity> forecastEntityList){
         Completable.fromAction(() -> dataBase.forecastEntityDAO().deleteAllForecast())
-                .subscribeOn(Schedulers.io())
+                .subscribeOn(schedulerIO)
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnComplete(() -> cacheForecast(forecastEntityList))
                 .subscribe();
     }
 
-    private void cacheForecast(List<ForecastEntity> forecastEntityList){
+    public void cacheForecast(List<ForecastEntity> forecastEntityList){
         Completable.fromAction(() -> dataBase.forecastEntityDAO().insertForecast(forecastEntityList))
-                .subscribeOn(Schedulers.io())
+                .subscribeOn(schedulerIO)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe();
     }
 
     public Flowable<List<ForecastEntity>> getCachedForecast(){
         return dataBase.forecastEntityDAO().getAllForecast()
-                .subscribeOn(Schedulers.io())
+                .subscribeOn(schedulerIO)
                 .observeOn(AndroidSchedulers.mainThread());
     }
 }

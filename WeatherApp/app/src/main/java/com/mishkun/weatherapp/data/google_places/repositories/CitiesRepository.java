@@ -17,6 +17,7 @@ import javax.inject.Inject;
 import io.reactivex.Completable;
 import io.reactivex.CompletableObserver;
 import io.reactivex.Flowable;
+import io.reactivex.Scheduler;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -25,10 +26,12 @@ import io.reactivex.schedulers.Schedulers;
 public class CitiesRepository implements CityInfoRepository{
 
     private DataBase dataBase;
+    private Scheduler schedulersIO;
 
     @Inject
-    public CitiesRepository(DataBase dataBase){
+    public CitiesRepository(DataBase dataBase, Scheduler schedulersIO){
         this.dataBase = dataBase;
+        this.schedulersIO = schedulersIO;
     }
 
     public Completable setCityInfo(Location location, String cityName){
@@ -50,23 +53,23 @@ public class CitiesRepository implements CityInfoRepository{
     public Single<String> getCityName(){
         // Return default city {Moscow) when no favourite city in database.
         return dataBase.cityDao().getFavourite()
-                .subscribeOn(Schedulers.io())
+                .subscribeOn(schedulersIO)
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(cityEntity -> (cityEntity.getCityName()))
-                .onErrorReturn(throwable -> "Rubber city");
+                .onErrorReturn(throwable -> "Default city");
     }
 
     @Override
     public Flowable<List<CityEntity>> getCitiesList(){
         return  dataBase.cityDao().getAllCities()
-                .subscribeOn(Schedulers.io())
+                .subscribeOn(schedulersIO)
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
     @Override
     public void setFavourite(String cityName, String lat, String favourite) {
         Completable.fromAction(() -> dataBase.cityDao().resetFavourite())
-                .subscribeOn(Schedulers.io())
+                .subscribeOn(schedulersIO)
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(new CompletableObserver() {
             @Override
             public void onSubscribe(Disposable d) {
@@ -76,7 +79,7 @@ public class CitiesRepository implements CityInfoRepository{
             public void onComplete() {
                 if (favourite.equals("1")) {
                     Completable.fromAction(() -> dataBase.cityDao().setFavourite(cityName, lat, "0"))
-                            .subscribeOn(Schedulers.io())
+                            .subscribeOn(schedulersIO)
                             .observeOn(AndroidSchedulers.mainThread()).subscribe();
                 } else {
                     Completable.fromAction(() -> dataBase.cityDao().setFavourite(cityName, lat, "1"))
@@ -95,7 +98,7 @@ public class CitiesRepository implements CityInfoRepository{
     @Override
     public Completable deleteCity(int cityPosition) {
         return Completable.fromAction(() -> dataBase.cityDao().delete(cityPosition))
-                .subscribeOn(Schedulers.io())
+                .subscribeOn(schedulersIO)
                 .observeOn(AndroidSchedulers.mainThread());
     }
 }
