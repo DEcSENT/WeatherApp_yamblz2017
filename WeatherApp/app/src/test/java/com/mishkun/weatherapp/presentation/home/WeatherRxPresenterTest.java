@@ -69,12 +69,7 @@ public class WeatherRxPresenterTest {
         when(updateWeather.run()).thenReturn(Completable.complete());
 
         WeatherViewModel weatherView = new WeatherViewModel("10", "10", "10", "10", R.drawable.sun, "test");
-        when(view.getWeatherConsumer()).thenReturn(new io.reactivex.functions.Consumer<WeatherViewModel>() {
-            @Override
-            public void accept(WeatherViewModel weatherViewModel) throws Exception {
-                weatherViewModel = weatherView;
-            }
-        });
+        when(view.getWeatherConsumer()).thenReturn(weatherViewModel -> weatherViewModel = weatherView);
         WeatherViewModel weatherViewModel = new WeatherViewModel("tes", "dfs", "dfs", "fdsf", R.drawable.sun, "dsf");
         when(weatherMapper.toWeatherViewModel(weather)).thenReturn(weatherViewModel);
         when(view.getLoadingStatusConsumer()).thenReturn(aBoolean -> aBoolean = true);

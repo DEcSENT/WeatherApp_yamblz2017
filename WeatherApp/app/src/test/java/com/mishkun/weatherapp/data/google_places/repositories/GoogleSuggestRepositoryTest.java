@@ -81,14 +81,6 @@ public class GoogleSuggestRepositoryTest {
         cityCoordinatesTestObserver.assertNoErrors().assertValue(testCity);
     }
 
-//    @Test
-//    public void getCitiesSuggest() throws Exception {
-//        when(googlePlacesApi.getSuggest("paris", "(cities)", "test"))
-//                .thenReturn(Single.just(citiesSuggest));
-//        googleSuggestRepository.getCitiesSuggest("paris");
-//        verify(googlePlacesApi).getSuggest("paris", "(cities)", "test");
-//    }
-
     @Test
     public void getCityCoordinates() throws Exception {
         when(googlePlacesApi.getDetailPlaceInfo(anyString(), anyString(), anyString()))

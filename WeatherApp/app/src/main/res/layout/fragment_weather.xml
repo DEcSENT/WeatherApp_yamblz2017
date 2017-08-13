@@ -24,6 +24,7 @@
 
             <TextView
                 android:id="@+id/cityTextView"
+                android:gravity="center"
                 style="@style/Weather_city_name_style"
                 android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"

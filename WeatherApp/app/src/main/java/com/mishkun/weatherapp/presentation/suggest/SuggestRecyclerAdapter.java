@@ -50,10 +50,6 @@ public class SuggestRecyclerAdapter extends RecyclerView.Adapter<SuggestRecycler
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         final Prediction pred = predictionList.get(position);
-        holder.itemView.setOnClickListener(
-                view -> {
-                    Log.v("ONCLICK", pred.getPlaceId());
-        });
         String predCity = pred.getDescription();
         String city = predCity.contains(",") ? predCity.substring(0, predCity.indexOf(",")) : predCity;
         String country = predCity.contains(",") ? predCity.substring(predCity.indexOf(",")+2, predCity.length()) : predCity;

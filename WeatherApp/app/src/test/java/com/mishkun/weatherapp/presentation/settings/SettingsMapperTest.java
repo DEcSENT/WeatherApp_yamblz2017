@@ -24,9 +24,9 @@ import static org.mockito.Mockito.when;
 public class SettingsMapperTest {
     SettingsMapper settingsMapper;
     @Mock
-    private Context context;
+    public Context context;
     @Mock
-    private Resources resources;
+    public Resources resources;
 
     private int[] testArray = {15, 30, 60, 180};
 

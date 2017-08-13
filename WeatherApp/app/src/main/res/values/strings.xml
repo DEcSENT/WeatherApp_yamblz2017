@@ -11,8 +11,7 @@
 
     <string name="hello_world">Hello, world!</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">WeatherApp\nAuthor: mishkun</string>
+    <string name="hello_blank_fragment">WeatherApp</string>
     <string name="time_schedule_preference_summary">Update weather every</string>
     <string name="moscow">Moscow</string>
     <string name="time_preference_key" translatable="false">time_preference</string>
@@ -49,8 +48,11 @@
     <string name="city_deleted_error">Delete error</string>
 
     <string name="error_no_internet">Error. No internet.</string>
+    <string name="error_cant_add_city">Error adding</string>
 
     <string name="forecast_text_date">Date</string>
     <string name="forecast_text_type">Weather type</string>
     <string name="forecast_text_temp">Temperature</string>
+
+    <string name="about_text">Authors: Denis Verentsov and Michail Levchenko</string>
 </resources>

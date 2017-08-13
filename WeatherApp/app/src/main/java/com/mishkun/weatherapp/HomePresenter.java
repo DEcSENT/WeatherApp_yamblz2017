@@ -47,6 +47,7 @@ public class HomePresenter implements HomePres {
     @Override
     public void openAboutFragment() {
         AboutFragment aboutFragment = new AboutFragment();
+        aboutFragment.setStyle( DialogFragment.STYLE_NORMAL, android.R.style.Theme );
         aboutFragment.show(fragmentManager, AboutFragment.TAG);
     }
 

@@ -33,6 +33,7 @@ import static com.mishkun.weatherapp.Constants.API_KEY_WEATHER;
 
 public class OpenWeatherForecastRepository {
 
+    /* Days count for forecast. */
     private final int DAYS_COUNT = 7;
 
     private DataBase dataBase;
@@ -59,14 +60,13 @@ public class OpenWeatherForecastRepository {
 
             @Override
             public void onSuccess(CityEntity cityEntity) {
-                //Looks like here may be NPE, couz first app start?
                 Location location = new Location(Double.parseDouble(cityEntity.getLatitude()), Double.parseDouble(cityEntity.getLongitude()));
                 getForecast(location);
             }
 
             @Override
             public void onError(Throwable e) {
-                Log.e("EERRRRORRRRRRRRR!", "onError: BAD FAVOURITE?! ," +  e);
+                Log.e("Error!", "No favourite here! And: " +  e);
             }
         });
     }
@@ -94,7 +94,7 @@ public class OpenWeatherForecastRepository {
 
             @Override
             public void onError(Throwable e) {
-                Log.e("ERROR!", "onError: =====NO INTERNET=====", e);
+                Log.e("Error!", "No internet?", e);
             }
         });
     }

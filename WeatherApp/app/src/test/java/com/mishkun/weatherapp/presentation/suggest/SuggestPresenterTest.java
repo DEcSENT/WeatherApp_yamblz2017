@@ -73,6 +73,6 @@ public class SuggestPresenterTest {
     @Test
     public void SomethingGoingWrong_getCityCoordinatesFromWeb() throws Exception {
         suggestPresenter.getCityCoordinatesFromWeb("some bad id");
-        verify(view).showError("Error");
+        verify(view).showError("Error adding");
     }
 }

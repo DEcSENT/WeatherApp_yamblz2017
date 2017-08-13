@@ -35,9 +35,8 @@ public class SuggestPresenter {
     }
 
     void getCityCoordinatesFromWeb(String cityID) {
-        //TODO: Try to fix NPE here<-------------------------------------
         applyCityInfo.run(cityID)
                 .subscribe(() -> view.terminateFragment(),
-                            (error) -> view.showError("Error"));
+                            (error) -> view.showError("Error adding"));
     }
 }

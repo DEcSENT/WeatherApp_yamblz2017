@@ -64,9 +64,6 @@ public class OpenWeatherForecastRepositoryTest {
     private List<ForecastEntity> forecastEntityList = new ArrayList<>();
 
     private TestScheduler testScheduler;
-    private TestObserver testObserver;
-
-    private Location location;
 
     @Before
     public void setUp() throws Exception {
@@ -93,9 +90,6 @@ public class OpenWeatherForecastRepositoryTest {
         forecastEntityList.add(forecastEntity);
         when(dataBase.forecastEntityDAO()).thenReturn(forecastEntityDAO);
         when(dataBase.forecastEntityDAO().getAllForecast()).thenReturn(Flowable.just(forecastEntityList));
-
-        location = new Location(10.0, 10.0);
-        //when(openWeatherMapApi.getForecastWeather(location.getLatitude(), location.getLongitude(), "test", 10)).thenReturn(Single.just(forecastWeather));
     }
 
     @Test
@@ -103,19 +97,6 @@ public class OpenWeatherForecastRepositoryTest {
         openWeatherForecastRepository.getFavouriteCityForecast();
         verify(dataBase.cityDao()).getFavourite();
     }
-
-//    @Test
-//    public void getForecast() throws Exception {
-//        //TODO: WTHAT HAPPEND HERE?!
-//        //WATAFUCKE?!-------------WHY NULL?!----------------<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-//        openWeatherForecastRepository.getForecast(location);
-//        testScheduler.triggerActions();
-//        verify(openWeatherMapApi).getForecastWeather(anyDouble(), anyDouble(), anyString(), anyInt());
-//
-////        TestObserver testObserver = new TestObserver();
-////        openWeatherMapApi.getForecastWeather(10, 10, "test", 10).subscribe(testObserver);
-////        testObserver.assertNoErrors();
-//    }
 
     @Test
     public void deleteAndCache() throws Exception {

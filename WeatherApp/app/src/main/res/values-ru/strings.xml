@@ -7,7 +7,7 @@
     <string name="settings_title">Настройки</string>
     <string name="about_title">О Приложении</string>
     <string name="hello_world">Здравствуй, мир!</string>
-    <string name="hello_blank_fragment">Приложение Погода\nАвтор: mishkun</string>
+    <string name="hello_blank_fragment">Приложение Погода</string>
     <string name="time_schedule_preference_summary">Обновлять погоду каждые</string>
     <string name="moscow">Москва</string>
     <string name="humidity_fmt_string">%.0f%%</string>
@@ -42,8 +42,11 @@
     <string name="city_deleted_error">Ошибка удаления</string>
 
     <string name="error_no_internet">Ошибка. Нет интернета.</string>
+    <string name="error_cant_add_city">Ошибка добавления города</string>
 
     <string name="forecast_text_date">Дата</string>
     <string name="forecast_text_type">Тип погоды</string>
     <string name="forecast_text_temp">Температура</string>
+
+    <string name="about_text">Авторы: Денис Веренцов и Михаил Левченко</string>
 </resources>

@@ -56,7 +56,7 @@ public class CitiesRepository implements CityInfoRepository{
                 .subscribeOn(schedulersIO)
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(cityEntity -> (cityEntity.getCityName()))
-                .onErrorReturn(throwable -> "Rubber city");
+                .onErrorReturn(throwable -> "Default city");
     }
 
     @Override

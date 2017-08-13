@@ -53,8 +53,6 @@ public class OpenWeatherMapCurrentWeatherRepositoryTest {
 
         List<WeatherRaw.WeatherConditions> list = new ArrayList<>();
         weatherRaw = new WeatherRaw(new WeatherRaw.Wind(), list, new WeatherRaw.Main());
-//        when(openWeatherMapApi.getWeather(10, 10, "test"))
-//                .thenReturn(Observable.just(weatherRaw));
 
         CacheEntity cacheEntity = new CacheEntity();
         cacheEntity.setCachedWeather("test");
@@ -62,14 +60,6 @@ public class OpenWeatherMapCurrentWeatherRepositoryTest {
         when(dataBase.cacheEntityDAO()).thenReturn(cacheEntityDAO);
         when(dataBase.cacheEntityDAO().getCache()).thenReturn(Flowable.just(cacheEntity));
     }
-
-//    @Test
-//    public void refreshData() throws Exception {
-//        //Wtf with WeatherRaw?! Previus owner did it?!
-//        openWeatherMapCurrentWeatherRepository.refreshData(new Location(10, 10)).subscribe();
-//        testScheduler.triggerActions();
-//        verify(openWeatherMapApi).getWeather(10, 10, "test");
-//    }
 
     @Test
     public void cacheIt() throws Exception {

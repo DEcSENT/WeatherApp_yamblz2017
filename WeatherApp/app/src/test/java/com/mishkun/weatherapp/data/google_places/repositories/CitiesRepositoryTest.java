@@ -66,11 +66,9 @@ public class CitiesRepositoryTest {
 
     }
 
-    //TODO - start this shit
     @Test
     public void setCityInfo() throws Exception {
         citiesRepository.setCityInfo(new Location(10, 10), "test").subscribe();
-        //testScheduler.triggerActions();
         verify(cityEntityDAO).insertCity(any(CityEntity.class));
     }
 
