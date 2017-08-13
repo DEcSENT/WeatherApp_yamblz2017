@@ -22,6 +22,7 @@ import java.util.List;
 
 import io.reactivex.Completable;
 import io.reactivex.Flowable;
+import io.reactivex.Scheduler;
 import io.reactivex.Single;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -36,16 +37,18 @@ public class OpenWeatherForecastRepository {
 
     private DataBase dataBase;
     private OpenWeatherMapApi openWeatherMapApi;
+    private Scheduler schedulerIO;
 
     @Inject
-    public OpenWeatherForecastRepository(@NonNull DataBase dataBase, @NonNull OpenWeatherMapApi openWeatherMapApi) {
+    public OpenWeatherForecastRepository(@NonNull DataBase dataBase, @NonNull OpenWeatherMapApi openWeatherMapApi, Scheduler scheduler) {
         this.dataBase = dataBase;
         this.openWeatherMapApi = openWeatherMapApi;
+        schedulerIO = scheduler;
     }
 
     public void getFavouriteCityForecast(){
         Single<CityEntity> cityEntitySingle = dataBase.cityDao().getFavourite()
-                .subscribeOn(Schedulers.io())
+                .subscribeOn(schedulerIO)
                 .observeOn(AndroidSchedulers.mainThread());
 
         cityEntitySingle.subscribe(new SingleObserver<CityEntity>() {
@@ -71,7 +74,7 @@ public class OpenWeatherForecastRepository {
     public void getForecast(Location location){
         Single<ForecastWeather> forecastWeatherSingle = openWeatherMapApi
                 .getForecastWeather(location.getLatitude(), location.getLongitude(), API_KEY_WEATHER, DAYS_COUNT)
-                .subscribeOn(Schedulers.io())
+                .subscribeOn(schedulerIO)
                 .observeOn(AndroidSchedulers.mainThread());
 
         forecastWeatherSingle.subscribe(new SingleObserver<ForecastWeather>() {
@@ -96,24 +99,24 @@ public class OpenWeatherForecastRepository {
         });
     }
 
-    private void deleteAndCache(List<ForecastEntity> forecastEntityList){
+    public void deleteAndCache(List<ForecastEntity> forecastEntityList){
         Completable.fromAction(() -> dataBase.forecastEntityDAO().deleteAllForecast())
-                .subscribeOn(Schedulers.io())
+                .subscribeOn(schedulerIO)
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnComplete(() -> cacheForecast(forecastEntityList))
                 .subscribe();
     }
 
-    private void cacheForecast(List<ForecastEntity> forecastEntityList){
+    public void cacheForecast(List<ForecastEntity> forecastEntityList){
         Completable.fromAction(() -> dataBase.forecastEntityDAO().insertForecast(forecastEntityList))
-                .subscribeOn(Schedulers.io())
+                .subscribeOn(schedulerIO)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe();
     }
 
     public Flowable<List<ForecastEntity>> getCachedForecast(){
         return dataBase.forecastEntityDAO().getAllForecast()
-                .subscribeOn(Schedulers.io())
+                .subscribeOn(schedulerIO)
                 .observeOn(AndroidSchedulers.mainThread());
     }
 }

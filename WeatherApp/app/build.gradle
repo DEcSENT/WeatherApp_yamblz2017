@@ -1,11 +1,13 @@
 apply plugin: 'com.android.application'
 apply from: rootProject.file('dependencies-mapping.gradle')
 apply from: rootProject.file('keystore-functions.gradle')
-apply plugin: 'jacoco-android'
+apply plugin: 'jacoco'
+apply from: '../jacoco.gradle'
 
 android {
     compileSdkVersion rootProject.target_sdk
     buildToolsVersion "25.0.2"
+
     defaultConfig {
         applicationId "com.mishkun.weatherapp"
         minSdkVersion rootProject.minimum_sdk
@@ -14,6 +16,7 @@ android {
         versionName rootProject.version_name
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     signingConfigs {
         release {
             keyAlias keystore_properties['keyAlias']

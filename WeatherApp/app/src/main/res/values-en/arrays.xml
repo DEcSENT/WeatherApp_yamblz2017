@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="time_schedule_preference_entries">
+        <item>"15 minutes"</item>
+        <item>"30 minutes"</item>
+        <item>"1 hour"</item>
+        <item>"3 hours"</item>
+    </string-array>
+    <integer-array name="time_schedule_preference_entry_values">
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>180</item>
+    </integer-array>
+</resources>

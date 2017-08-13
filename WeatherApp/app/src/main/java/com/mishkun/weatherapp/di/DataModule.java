@@ -15,6 +15,8 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import io.reactivex.Scheduler;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -54,18 +56,18 @@ class DataModule {
     @Provides
     @Singleton
     CurrentWeatherProvider provideCurrentWeather(OpenWeatherMapApi openWeatherMapApi, DataBase dataBase) {
-        return new OpenWeatherMapCurrentWeatherRepository(openWeatherMapApi, dataBase);
+        return new OpenWeatherMapCurrentWeatherRepository(openWeatherMapApi, dataBase, Schedulers.io());
     }
 
     @Provides
     @Singleton
     CityInfoRepository provideCityInfo(DataBase dataBase){
-        return new CitiesRepository(dataBase);
+        return new CitiesRepository(dataBase, Schedulers.io());
     }
 
     @Provides
     @Singleton
     OpenWeatherForecastRepository openWeatherForecastRepository(DataBase dataBase, OpenWeatherMapApi openWeatherMapApi){
-        return new OpenWeatherForecastRepository(dataBase, openWeatherMapApi);
+        return new OpenWeatherForecastRepository(dataBase, openWeatherMapApi, Schedulers.io());
     }
 }

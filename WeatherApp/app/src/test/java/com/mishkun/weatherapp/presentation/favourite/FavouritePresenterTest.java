@@ -1,6 +1,5 @@
 package com.mishkun.weatherapp.presentation.favourite;
 
-import com.mishkun.weatherapp.data.google_places.citiesSuggest.Prediction;
 import com.mishkun.weatherapp.db.CityEntity;
 import com.mishkun.weatherapp.domain.interactors.ApplyCityInfo;
 import com.mishkun.weatherapp.domain.interactors.GetSuggests;
@@ -16,14 +15,10 @@ import java.util.List;
 
 import io.reactivex.Completable;
 import io.reactivex.Flowable;
-import io.reactivex.Single;
-import io.reactivex.disposables.CompositeDisposable;
 
-import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -47,22 +42,24 @@ public class FavouritePresenterTest {
         favouritePresenter = new FavouritePresenter(applyCityInfo, getSuggests);
         favouritePresenter.onAttach(view);
 
-//        List<CityEntity> list = new ArrayList<>();
-//        CityEntity cityEntity = new CityEntity();
-//        cityEntity.setCityName("sdfsdfsdf");
-//        list.add(cityEntity);
-//
-//        when(applyCityInfo.getCities()).thenReturn(Flowable.just(list));
-        when(applyCityInfo.deleteCity(anyInt())).thenReturn(Completable.complete());
+        List<CityEntity> list = new ArrayList<>();
+        CityEntity cityEntity = new CityEntity();
+        cityEntity.setCityName("sdfsdfsdf");
+        list.add(cityEntity);
 
+        when(applyCityInfo.deleteCity(10)).thenReturn(Completable.complete());
+        when(applyCityInfo.deleteCity(-1)).thenReturn(Completable.error(new Throwable()));
         doNothing().when(view).showMessage(anyInt());
+
+        when(applyCityInfo.getCities()).thenReturn(Flowable.just(list));
+        doNothing().when(view).setFavouriteCities(list);
     }
 
-//    @Test
-//    public void getCitiesList() throws Exception {
-//        favouritePresenter.getCitiesList();
-//        verify(applyCityInfo).getCities();
-//    }
+    @Test
+    public void getCitiesList() throws Exception {
+        favouritePresenter.getCitiesList();
+        verify(applyCityInfo).getCities();
+    }
 
     @Test
     public void setFavouriteCity() throws Exception {
@@ -72,7 +69,13 @@ public class FavouritePresenterTest {
 
     @Test
     public void deleteCity() throws Exception {
-        favouritePresenter.deleteCity(anyInt());
-        verify(applyCityInfo).deleteCity(anyInt());
+        favouritePresenter.deleteCity(10);
+        verify(applyCityInfo).deleteCity(10);
+    }
+
+    @Test
+    public void BadParameterTest_deleteCity() throws Exception {
+        favouritePresenter.deleteCity(-1);
+        verify(applyCityInfo).deleteCity(-1);
     }
 }
